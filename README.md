@@ -178,13 +178,20 @@ const resposta = await sitef.leSimNaoPinPad("Lorem ipsum?");
 
 ## Contribuidores
 
-[//]: contributor-faces
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/danielccunha"><img src="https://avatars2.githubusercontent.com/u/32555455?s=460&v=4" width="100px;" alt="Daniel Cunha"/><br /><sub><b>Daniel Cunha</b></sub></a></td>
+    <td align="center"><a href="https://github.com/fefurst"><img src="https://avatars.githubusercontent.com/u/16591705?v=4" width="100px;" alt="Felipe Furst"/><br /><sub><b>Felipe Furst</b></sub></a></td>    
+  </tr>
+</table>
+
+<!-- [//]: contributor-faces
 
 <a href="https://github.com/danielccunha"><img src="https://avatars2.githubusercontent.com/u/32555455?s=460&v=4" title="danielccunha" width="80" height="80"></a>
 
 <a href="https://github.com/fefurst"><img src="https://avatars.githubusercontent.com/u/16591705?v=4" title="fefurst" width="80" height="80"></a>
 
-[//]: contributor-faces
+[//]: contributor-faces -->
 
 ## Licença
 
