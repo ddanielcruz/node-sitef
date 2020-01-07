@@ -1,0 +1,25 @@
+{
+  "name": "node-sitef",
+  "version": "1.0.0",
+  "repository": "https://github.com/danielccunha/node-sitef",
+  "author": "Daniel Cunha <danielcunha54@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "node_modules/.bin/mocha",
+    "test-watch": "nodemon --exec 'yarn test'"
+  },
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "node-addon-api": "^2.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "expect": "^24.9.0",
+    "mocha": "^6.2.2",
+    "moment": "^2.24.0",
+    "nodemon": "^2.0.2"
+  },
+  "contributors": [
+    "Felipe Furst <fefurst@gmail.com>"
+  ]
+}
