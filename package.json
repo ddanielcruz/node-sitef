@@ -4,6 +4,7 @@
   "repository": "https://github.com/danielccunha/node-sitef",
   "author": "Daniel Cunha <danielcunha54@gmail.com>",
   "license": "MIT",
+  "main": "src/sitef.js",
   "scripts": {
     "test": "node_modules/.bin/mocha",
     "test-watch": "nodemon --exec 'yarn test'"
