@@ -1,10 +1,17 @@
 {
   "name": "node-sitef",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": "https://github.com/danielccunha/node-sitef",
-  "author": "Daniel Cunha <danielcunha54@gmail.com>",
-  "license": "MIT",
+  "homepage": "https://github.com/danielccunha/node-sitef",
+  "author": "Daniel Cunha <danielcunha54@gmail.com> (https://github.com/danielccunha)",
+  "license": "GPL-3.0",
+  "bugs": "https://github.com/danielccunha/node-sitef/issues",
   "main": "src/sitef.js",
+  "keywords": [
+    "sitef",
+    "pagamento",
+    "pinpad"
+  ],
   "scripts": {
     "test": "node_modules/.bin/mocha",
     "test-watch": "nodemon --exec 'yarn test'"
@@ -22,6 +29,6 @@
     "nodemon": "^2.0.2"
   },
   "contributors": [
-    "Felipe Furst <fefurst@gmail.com>"
+    "Felipe Furst <fefurst@gmail.com> (https://github.com/fefurst)"
   ]
 }
