@@ -185,14 +185,6 @@ const resposta = await sitef.leSimNaoPinPad("Lorem ipsum?");
   </tr>
 </table>
 
-<!-- [//]: contributor-faces
-
-<a href="https://github.com/danielccunha"><img src="https://avatars2.githubusercontent.com/u/32555455?s=460&v=4" title="danielccunha" width="80" height="80"></a>
-
-<a href="https://github.com/fefurst"><img src="https://avatars.githubusercontent.com/u/16591705?v=4" title="fefurst" width="80" height="80"></a>
-
-[//]: contributor-faces -->
-
 ## Licença
 
 GNU General Public License v3.0.
