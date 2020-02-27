@@ -14,8 +14,8 @@
     "software-express"
   ],
   "scripts": {
-    "test": "node_modules/.bin/mocha",
-    "test-watch": "nodemon --exec 'yarn test'"
+    "start": "node example",
+    "start-watch": "nodemon example"
   },
   "dependencies": {
     "bindings": "^1.5.0",

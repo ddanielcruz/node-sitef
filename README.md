@@ -41,7 +41,7 @@ const path = require("path");
 const CliSiTef = require("node-sitef");
 
 // Caminho absoluto para a DLL do SiTef
-const dllPath = path.resolve(__dirname, "..", "bin/libclisitef.so");
+const dllPath = path.resolve(__dirname, "..", "bin", "libclisitef.so");
 const sitef = new CliSiTef(dllPath);
 ```
 

@@ -132,12 +132,10 @@ npm-debug.log*
 .DS_Store
 
 # Custom
-bin/
 *.dmp
 CliSiTef.ini
-libclisitef.so
-libemv64.so
-config/pinpad.js
+**/libclisitef.so
+**/libemv64.so
 
 cli/
 _cli/
