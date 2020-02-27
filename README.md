@@ -1,12 +1,12 @@
-# Node Sitef
+# Node SiTef
 
-Biblioteca Node.js para interação com o **Sitef** através de sua DLL, utilizando [C++ Addons](https://nodejs.org/api/addons.html).
+Biblioteca Node.js para interação com o **SiTef** através de sua DLL, utilizando [C++ Addons](https://nodejs.org/api/addons.html).
 
-Todas as regras informadas na documentação do Sitef se mantém. O pacote é apenas um intermediário para a DLL, facilitando seu uso em **projetos Node.js**.
+Todas as regras informadas na documentação do SiTef se mantém. O pacote é apenas um intermediário para a DLL, facilitando seu uso em **projetos Node.js**.
 
 ## Documentação
 
-- [Node Sitef](#node-sitef)
+- [Node SiTef](#node-sitef)
   - [Documentação](#documenta%c3%a7%c3%a3o)
   - [Importante!](#importante)
   - [Configuração](#configura%c3%a7%c3%a3o)
@@ -27,13 +27,13 @@ O pacote está em fase de **desenvolvimento** e por enquanto só foi testado uti
 
 ## Configuração
 
-Após adicionar o pacote, no root do seu projeto, adicione o arquivo `CliSitef.ini` para configurar o Sitef. Ele deve ser adicionado no root para que a biblioteca possa encontrá-lo.
+Após adicionar o pacote, no root do seu projeto, adicione o arquivo `CliSiTef.ini` para configurar o SiTef. Ele deve ser adicionado no root para que a biblioteca possa encontrá-lo.
 
-Por fim, crie uma pasta `bin` na sua aplicação (ou algum outro nome de sua preferência) e adicione as DLLs do Sitef. Elas serão referenciadas posteriormente.
+Por fim, crie uma pasta `bin` na sua aplicação (ou algum outro nome de sua preferência) e adicione as DLLs do SiTef. Elas serão referenciadas posteriormente.
 
 ## Utilização
 
-O pacote possui apenas uma única classe a qual irá representar o SiTef. Através dela que serão realizadas todas as operações. Para utilizar o pacote, basta importá-lo e instanciar um novo Sitef passando como parâmetro o caminho para a DLL:
+O pacote possui apenas uma única classe a qual irá representar o SiTef. Através dela que serão realizadas todas as operações. Para utilizar o pacote, basta importá-lo e instanciar um novo SiTef passando como parâmetro o caminho para a DLL:
 
 ```javascript
 const path = require("path");
@@ -47,7 +47,7 @@ const sitef = new CliSiTef(dllPath);
 
 ### Configuração
 
-Para configurar o PinPad basta chamar o método `configurar`, mapeamento da função `ConfiguraIntSitefInterativo`. O método recebe um objeto possuindo os parâmetros de configuração, como no seguinte exemplo:
+Para configurar o PinPad basta chamar o método `configurar`, mapeamento da função `ConfiguraIntSiTefInterativo`. O método recebe um objeto possuindo os parâmetros de configuração, como no seguinte exemplo:
 
 ```javascript
 // Parâmetro obrigatórios
@@ -81,7 +81,7 @@ const retorno = await sitef.escreverMensagem("Lorem ipsum");
 
 ### Iniciar função
 
-A função `IniciaFuncaoSitefInterativo` está mapeada como `iniciarFuncao`. Ela possui o mesmo funcionamento da função padrão, porém recebe os parâmetros em um objeto e retorna uma `Promise`, que quando concluída irá retornar o código de retorno.
+A função `IniciaFuncaoSiTefInterativo` está mapeada como `iniciarFuncao`. Ela possui o mesmo funcionamento da função padrão, porém recebe os parâmetros em um objeto e retorna uma `Promise`, que quando concluída irá retornar o código de retorno.
 
 ```javascript
 const parametros = {
@@ -97,11 +97,11 @@ const parametros = {
 const retorno = await sitef.iniciarFuncao(parametros);
 ```
 
-As regras de negócio da documentação do Sitef se mantém, portanto os dados devem ser informados no mesmo formato requisitado.
+As regras de negócio da documentação do SiTef se mantém, portanto os dados devem ser informados no mesmo formato requisitado.
 
 ### Continuar função
 
-A função `ContinuaFuncaoSitefInterativo` está mapeada como `continuarFuncao`. O funcionamento do método é o mesmo da função mapeada. Entretanto, existem duas diferenças importantes.
+A função `ContinuaFuncaoSiTefInterativo` está mapeada como `continuarFuncao`. O funcionamento do método é o mesmo da função mapeada. Entretanto, existem duas diferenças importantes.
 
 A primeira é que o método recebe os parâmetros como um objeto da mesma forma como os demais métodos. A segunda é que o retorno da `Promise` desta vez não é um literal e sim um objeto.
 
@@ -131,7 +131,7 @@ const {
 
 ### Finalizar função
 
-A função `FinalizaFuncaoSitefInterativo` está mapeada como `finalizarFuncao`. Da mesma maneira que o método `iniciarFuncao`, suas únicas diferenças são os parâmetros informados como objeto e o seu retorno encapsulado em uma `Promise`.
+A função `FinalizaFuncaoSiTefInterativo` está mapeada como `finalizarFuncao`. Da mesma maneira que o método `iniciarFuncao`, suas únicas diferenças são os parâmetros informados como objeto e o seu retorno encapsulado em uma `Promise`.
 
 ```javascript
 const parametros = {
