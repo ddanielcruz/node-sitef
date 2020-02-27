@@ -36,12 +36,13 @@ Por fim, crie uma pasta `bin` na sua aplicação (ou algum outro nome de sua pre
 O pacote possui apenas uma única classe a qual irá representar o SiTef. Através dela que serão realizadas todas as operações. Para utilizar o pacote, basta importá-lo e instanciar um novo Sitef passando como parâmetro o caminho para a DLL:
 
 ```javascript
-const Sitef = require("node-sitef");
 const path = require("path");
+
+const CliSiTef = require("node-sitef");
 
 // Caminho absoluto para a DLL do SiTef
 const dllPath = path.resolve(__dirname, "..", "bin/libclisitef.so");
-const sitef = new Sitef(dllPath);
+const sitef = new CliSiTef(dllPath);
 ```
 
 ### Configuração
@@ -52,8 +53,8 @@ Para configurar o PinPad basta chamar o método `configurar`, mapeamento da fun�
 // Parâmetro obrigatórios
 const parametros = {
   ip: "0.0.0.0",
-  idLoja: "00000000",
-  idTerminal: "00000000",
+  loja: "00000000",
+  terminal: "00000000",
   reservado: ""
 };
 

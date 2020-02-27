@@ -1,7 +1,7 @@
-const sitef = require("bindings")("sitef");
+const sitefLib = require("bindings")("sitef");
 
-const createPromise = handler =>
-  new Promise((resolve, reject) => {
+const createPromise = handler => {
+  return new Promise((resolve, reject) => {
     try {
       const value = handler();
       resolve(value);
@@ -9,29 +9,30 @@ const createPromise = handler =>
       reject(error);
     }
   });
+};
 
-module.exports = class Sitef {
-  constructor(caminhoDLL) {
-    if (!caminhoDLL) {
-      throw new Error("Informe a DLL do Sitef.");
+module.exports = class CliSiTef {
+  constructor(path) {
+    if (!path) {
+      throw new Error("Informe o caminho absoluto para a DLL do SiTef.");
     }
 
-    sitef.carregarDLL(caminhoDLL);
+    sitefLib.carregarDLL(path);
   }
 
-  configurar({ ip, idLoja, idTerminal, reservado }) {
+  configurar({ ip, loja, terminal, reservado }) {
     return createPromise(() =>
-      sitef.configuraIntSiTefInterativo(ip, idLoja, idTerminal, reservado)
+      sitefLib.configuraIntSiTefInterativo(ip, loja, terminal, reservado)
     );
   }
 
   verificarPresenca() {
-    return createPromise(() => sitef.verificaPresencaPinPad());
+    return createPromise(() => sitefLib.verificaPresencaPinPad());
   }
 
   escreverMensagem(mensagem) {
     return createPromise(() =>
-      sitef.escreveMensagemPermanentePinPad(mensagem || "")
+      sitefLib.escreveMensagemPermanentePinPad(mensagem || "")
     );
   }
 
@@ -45,7 +46,7 @@ module.exports = class Sitef {
     parametros
   }) {
     return createPromise(() =>
-      sitef.iniciaFuncaoSiTefInterativo(
+      sitefLib.iniciaFuncaoSiTefInterativo(
         funcao,
         valor || "",
         cupomFiscal,
@@ -67,7 +68,7 @@ module.exports = class Sitef {
     continua
   }) {
     return createPromise(() =>
-      sitef.continuaFuncaoSiTefInterativo(
+      sitefLib.continuaFuncaoSiTefInterativo(
         comando,
         tipoCampo,
         tamMinimo,
@@ -87,7 +88,7 @@ module.exports = class Sitef {
     parametros
   }) {
     return createPromise(() =>
-      sitef.finalizaFuncaoSiTefInterativo(
+      sitefLib.finalizaFuncaoSiTefInterativo(
         confirma,
         cupomFiscal,
         dataFiscal,
@@ -98,6 +99,6 @@ module.exports = class Sitef {
   }
 
   leSimNaoPinPad(mensagem) {
-    return createPromise(() => sitef.leSimNaoPinPad(mensagem));
+    return createPromise(() => sitefLib.leSimNaoPinPad(mensagem));
   }
 };
