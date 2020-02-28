@@ -10,6 +10,7 @@ const options = {
   C: createOption("Configurar", client.configurar),
   V: createOption("Verificar presença", client.verificarPresenca),
   E: createOption("Escrever mensagem", client.escreverMensagem),
+  F: createOption("Simular função", client.simularFuncao),
   L: createOption("Limpar console", console.clear),
   M: createOption("Mostrar menu", showMenu),
   S: createOption("Sair", () => console.log("Encerrando o processo..."))
@@ -32,7 +33,7 @@ const main = async () => {
   showMenu();
 
   do {
-    let option = await askQuestion(chalk.yellow("Opção: "));
+    let option = await askQuestion("Opção: ");
     option = option ? option.toUpperCase() : "";
 
     if (!keys.includes(option)) {

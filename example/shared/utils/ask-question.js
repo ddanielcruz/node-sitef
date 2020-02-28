@@ -1,4 +1,5 @@
 const readline = require("readline");
+const chalk = require("chalk");
 
 module.exports = query => {
   const rl = readline.createInterface({
@@ -8,7 +9,7 @@ module.exports = query => {
   });
 
   return new Promise(resolve =>
-    rl.question(query, ans => {
+    rl.question(chalk.yellow(query), ans => {
       rl.close();
       resolve(ans);
     })
