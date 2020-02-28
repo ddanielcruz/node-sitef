@@ -1,6 +1,6 @@
 const path = require("path");
 
-const CliSiTef = require("../src/cli-sitef");
+const CliSiTef = require("../../src/cli-sitef");
 const config = require("./config");
 
 // Cria o objeto do SiTef
