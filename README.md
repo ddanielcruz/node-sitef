@@ -27,7 +27,9 @@ O pacote está em fase de **desenvolvimento** e por enquanto só foi testado uti
 
 ## Configuração
 
-Após adicionar o pacote, no root do seu projeto, adicione o arquivo `CliSiTef.ini` para configurar o SiTef. Ele deve ser adicionado no root para que a biblioteca possa encontrá-lo.
+Após adicionar o pacote, no **root do seu projeto**, adicione o arquivo `CliSiTef.ini` para configurar o SiTef. Ele deve ser adicionado no root para que a biblioteca possa encontrá-lo.
+
+Este passo é muito importante, pois, mesmo que você consiga instanciar o objeto do SiTef, quando você tentar executar qualquer função será retornado zero (sucesso). O motivo disso é desconhecido, é uma particularidade da biblioteca.
 
 Por fim, crie uma pasta `bin` na sua aplicação (ou algum outro nome de sua preferência) e adicione as DLLs do SiTef. Elas serão referenciadas posteriormente.
 
