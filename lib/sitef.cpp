@@ -37,7 +37,7 @@ Value carregarDLL(const CallbackInfo &info)
   if (info.Length() < 1)
     napi_throw_error(env, "0", "Informe o caminho da DLL.");
   else if (!info[0].IsString())
-    napi_throw_type_error(env, "1", "O caminho da DLL deve ser uma string.");
+    napi_throw_type_error(env, "1", "O caminho informado não é uma string válida.");
   else
   {
     string path = info[0].ToString().Utf8Value();
@@ -58,7 +58,7 @@ Value configuraIntSiTefInterativo(const CallbackInfo &info)
 
   if (!handler)
   {
-    napi_throw_error(env, "-1", "Carregue a DLL do SITEF!");
+    napi_throw_error(env, "-1", "Carregue a DLL do SiTef!");
     return env.Null();
   }
 
@@ -79,7 +79,7 @@ Value verificaPresencaPinPad(const CallbackInfo &info)
 
   if (!handler)
   {
-    napi_throw_error(env, "-1", "Carregue a DLL do SITEF!");
+    napi_throw_error(env, "-1", "Carregue a DLL do SiTef!");
     return env.Null();
   }
 
@@ -94,7 +94,7 @@ Value iniciaFuncaoSiTefInterativo(const CallbackInfo &info)
 
   if (!handler)
   {
-    napi_throw_error(env, "-1", "Carregue a DLL do SITEF!");
+    napi_throw_error(env, "-1", "Carregue a DLL do SiTef!");
     return env.Null();
   }
 
@@ -118,7 +118,7 @@ Value continuaFuncaoSiTefInterativo(const CallbackInfo &info)
 
   if (!handler)
   {
-    napi_throw_error(env, "-1", "Carregue a DLL do SITEF!");
+    napi_throw_error(env, "-1", "Carregue a DLL do SiTef!");
     return env.Null();
   }
 
@@ -160,7 +160,7 @@ Value finalizaFuncaoSiTefInterativo(const CallbackInfo &info)
 
   if (!handler)
   {
-    napi_throw_error(env, "-1", "Carregue a DLL do SITEF!");
+    napi_throw_error(env, "-1", "Carregue a DLL do SiTef!");
     return env.Null();
   }
 
@@ -182,7 +182,7 @@ Value escreveMensagemPermanentePinPad(const CallbackInfo &info)
 
   if (!handler)
   {
-    napi_throw_error(env, "-1", "Carregue a DLL do SITEF!");
+    napi_throw_error(env, "-1", "Carregue a DLL do SiTef!");
     return env.Null();
   }
 
@@ -199,7 +199,7 @@ Value leSimNaoPinPad(const CallbackInfo &info)
 
   if (!handler)
   {
-    napi_throw_error(env, "-1", "Carregue a DLL do SITEF!");
+    napi_throw_error(env, "-1", "Carregue a DLL do SiTef!");
     return env.Null();
   }
 
