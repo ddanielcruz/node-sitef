@@ -1,31 +1,9 @@
-#include <napi.h>
-#include <string.h>
-#include <dlfcn.h>
-#include <iostream>
+#include "nodesitef.hpp"
+#include "nodesitefpromise.cpp"
 
-// Tipos dos métodos do PinPad
-typedef int (*VerificaPresencaPinPad)();
-typedef int (*ConfiguraIntSiTefInterativo)(const char *, const char *, const char *, const char *);
-typedef int (*IniciaFuncaoSiTefInterativo)(int, const char *, const char *, const char *, const char *, const char *, const char *);
-typedef int (*ContinuaFuncaoSiTefInterativo)(int *, long *, int *, int *, const char *, int, int);
-typedef void (*FinalizaFuncaoSiTefInterativo)(short, const char *, const char *, const char *, const char *);
-typedef int (*EscreveMensagemPermanentePinPad)(const char *);
-typedef int (*LeSimNaoPinPad)(const char *);
-
-using Napi::Boolean;
-using Napi::CallbackInfo;
-using Napi::Env;
-using Napi::Error;
-using Napi::Function;
-using Napi::Number;
-using Napi::Object;
-using Napi::String;
-using Napi::TypeError;
-using Napi::Value;
-
-using std::string;
 
 void *handler;
+
 
 Value carregarDLL(const CallbackInfo &info)
 {
@@ -52,23 +30,39 @@ Value carregarDLL(const CallbackInfo &info)
   return env.Null();
 }
 
-Value configuraIntSiTefInterativo(const CallbackInfo &info)
-{
-  Env env = info.Env();
 
+int c_configuraIntSiTefInterativo(const char *ip, const char *terminal, const char *loja, const char *reservado)
+{
   if (!handler)
   {
-    napi_throw_error(env, "-1", "Carregue a DLL do SiTef!");
-    return env.Null();
+    throw("Carregue a DLL do SiTef!");
   }
 
   ConfiguraIntSiTefInterativo configuraSitef = (ConfiguraIntSiTefInterativo)dlsym(handler, "ConfiguraIntSiTefInterativo");
 
-  int retorno = configuraSitef(
+  return configuraSitef(
+      ip,
+      terminal,
+      loja,
+      reservado);
+}
+
+
+Value configuraIntSiTefInterativo(const CallbackInfo &info)
+{
+  Env env = info.Env();
+
+  int retorno;
+  try {
+     retorno = c_configuraIntSiTefInterativo(
       info[0].ToString().Utf8Value().c_str(),
       info[1].ToString().Utf8Value().c_str(),
       info[2].ToString().Utf8Value().c_str(),
       info[3].ToString().Utf8Value().c_str());
+  } catch(const std::exception& e) {
+    napi_throw_error(env, "-1", e.what());
+    return env.Null();
+  }
 
   return Number::New(env, retorno);
 }
@@ -210,8 +204,14 @@ Value leSimNaoPinPad(const CallbackInfo &info)
   return Number::New(env, retorno);
 }
 
+
 Object Init(Env env, Object exports)
 {
+
+  exports.Set(
+      String::New(env, "teste"),
+      Function::New(env, AsyncWorker::Create));
+
   exports.Set(
       String::New(env, "carregarDLL"),
       Function::New(env, carregarDLL));
@@ -247,4 +247,4 @@ Object Init(Env env, Object exports)
   return exports;
 }
 
-NODE_API_MODULE(sitef, Init);
+NODE_API_MODULE(nodesitef, Init);

@@ -1,4 +1,4 @@
-const sitefLib = require("bindings")("sitef");
+const sitefLib = require("bindings")("nodesitef");
 
 const createPromise = handler => {
   return new Promise((resolve, reject) => {
@@ -18,6 +18,10 @@ module.exports = class CliSiTef {
     }
 
     sitefLib.carregarDLL(path);
+  }
+
+  teste({ ip, loja, terminal, reservado }) {
+    return sitefLib.teste(ip, loja, terminal, reservado)
   }
 
   configurar({ ip, loja, terminal, reservado }) {
