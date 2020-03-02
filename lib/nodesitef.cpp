@@ -1,9 +1,7 @@
 #include "nodesitef.hpp"
-#include "nodesitefpromise.cpp"
-
+#include "promises/configPromise.cpp"
 
 void *handler;
-
 
 Value carregarDLL(const CallbackInfo &info)
 {
@@ -30,13 +28,11 @@ Value carregarDLL(const CallbackInfo &info)
   return env.Null();
 }
 
-
-int c_configuraIntSiTefInterativo(const char *ip, const char *terminal, const char *loja, const char *reservado)
+int configuraIntSiTefInterativo(const char *ip, const char *terminal, const char *loja, const char *reservado)
 {
   if (!handler)
-  {
+
     throw("Carregue a DLL do SiTef!");
-  }
 
   ConfiguraIntSiTefInterativo configuraSitef = (ConfiguraIntSiTefInterativo)dlsym(handler, "ConfiguraIntSiTefInterativo");
 
@@ -45,26 +41,6 @@ int c_configuraIntSiTefInterativo(const char *ip, const char *terminal, const ch
       terminal,
       loja,
       reservado);
-}
-
-
-Value configuraIntSiTefInterativo(const CallbackInfo &info)
-{
-  Env env = info.Env();
-
-  int retorno;
-  try {
-     retorno = c_configuraIntSiTefInterativo(
-      info[0].ToString().Utf8Value().c_str(),
-      info[1].ToString().Utf8Value().c_str(),
-      info[2].ToString().Utf8Value().c_str(),
-      info[3].ToString().Utf8Value().c_str());
-  } catch(const std::exception& e) {
-    napi_throw_error(env, "-1", e.what());
-    return env.Null();
-  }
-
-  return Number::New(env, retorno);
 }
 
 Value verificaPresencaPinPad(const CallbackInfo &info)
@@ -204,21 +180,15 @@ Value leSimNaoPinPad(const CallbackInfo &info)
   return Number::New(env, retorno);
 }
 
-
 Object Init(Env env, Object exports)
 {
-
-  exports.Set(
-      String::New(env, "teste"),
-      Function::New(env, AsyncWorker::Create));
-
   exports.Set(
       String::New(env, "carregarDLL"),
       Function::New(env, carregarDLL));
 
   exports.Set(
       String::New(env, "configuraIntSiTefInterativo"),
-      Function::New(env, configuraIntSiTefInterativo));
+      Function::New(env, ConfigPromise::Create));
 
   exports.Set(
       String::New(env, "verificaPresencaPinPad"),

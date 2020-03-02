@@ -11,7 +11,7 @@
         ['OS=="win"', { "defines": [ "_HAS_EXCEPTIONS=1" ] }]
       ],
       "sources": [ 
-        "lib/nodesitefpromise.cpp",
+        "lib/promises/*",
         "lib/nodesitef.hpp",
         "lib/nodesitef.cpp"
       ],
