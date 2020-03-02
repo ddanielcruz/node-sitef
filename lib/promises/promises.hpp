@@ -6,5 +6,6 @@
 #include "escreverMensagemPromise.cpp"
 #include "leSimNaoPromise.cpp"
 #include "iniciaFuncaoPromise.cpp"
+#include "finalizaFuncaoPromise.cpp"
 
 #endif

@@ -132,26 +132,14 @@ Value continuaFuncaoSiTefInterativo(const CallbackInfo &info)
   return obj;
 }
 
-Value finalizaFuncaoSiTefInterativo(const CallbackInfo &info)
+void finalizaFuncaoSiTefInterativo(int confirma, const char *cupomFiscal, const char *dataFiscal, const char *horaFiscal, const char *paramAdicionais)
 {
-  Env env = info.Env();
-
   if (!handler)
-  {
-    napi_throw_error(env, "-1", "Carregue a DLL do SiTef!");
-    return env.Null();
-  }
+
+    throw("Carregue a DLL do SiTef!");
 
   FinalizaFuncaoSiTefInterativo finalizaFuncao = (FinalizaFuncaoSiTefInterativo)dlsym(handler, "FinalizaFuncaoSiTefInterativo");
-
-  finalizaFuncao(
-      static_cast<short>(info[0].ToNumber().Int32Value()),
-      info[1].ToString().Utf8Value().c_str(),
-      info[2].ToString().Utf8Value().c_str(),
-      info[3].ToString().Utf8Value().c_str(),
-      info[4].ToString().Utf8Value().c_str());
-
-  return Boolean::New(env, true);
+  finalizaFuncao(confirma, cupomFiscal, dataFiscal, horaFiscal, paramAdicionais);
 }
 
 Object Init(Env env, Object exports)
@@ -186,7 +174,7 @@ Object Init(Env env, Object exports)
 
   exports.Set(
       String::New(env, "finalizaFuncaoSiTefInterativo"),
-      Function::New(env, finalizaFuncaoSiTefInterativo));
+      Function::New(env, FinalizaFuncaoPromise::Create));
 
   return exports;
 }

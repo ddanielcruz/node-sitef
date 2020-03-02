@@ -32,12 +32,12 @@ typedef int (*LeSimNaoPinPad)(const char *);
 
 Value carregarDLL(const CallbackInfo &info);
 Value continuaFuncaoSiTefInterativo(const CallbackInfo &info);
-Value finalizaFuncaoSiTefInterativo(const CallbackInfo &info);
 
 int verificaPresencaPinPad();
 int configuraIntSiTefInterativo(const char *, const char *, const char *, const char *);
 int escreveMensagemPermanentePinPad(const char *);
 int leSimNaoPinPad(const char *);
 int iniciaFuncaoSiTefInterativo(int, const char *, const char *, const char *, const char *, const char *, const char *);
+void finalizaFuncaoSiTefInterativo(int confirma, const char *cupomFiscal, const char *dataFiscal, const char *horaFiscal, const char *paramAdicionais);
 
 #endif /* NODESITEF_H */
