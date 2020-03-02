@@ -31,13 +31,13 @@ typedef int (*EscreveMensagemPermanentePinPad)(const char *);
 typedef int (*LeSimNaoPinPad)(const char *);
 
 Value carregarDLL(const CallbackInfo &info);
-Value iniciaFuncaoSiTefInterativo(const CallbackInfo &info);
 Value continuaFuncaoSiTefInterativo(const CallbackInfo &info);
 Value finalizaFuncaoSiTefInterativo(const CallbackInfo &info);
 
 int verificaPresencaPinPad();
-int configuraIntSiTefInterativo(const char *ip, const char *terminal, const char *loja, const char *reservado);
-int escreveMensagemPermanentePinPad(const char *mensagem);
-int leSimNaoPinPad(const char *mensagem);
+int configuraIntSiTefInterativo(const char *, const char *, const char *, const char *);
+int escreveMensagemPermanentePinPad(const char *);
+int leSimNaoPinPad(const char *);
+int iniciaFuncaoSiTefInterativo(int, const char *, const char *, const char *, const char *, const char *, const char *);
 
 #endif /* NODESITEF_H */

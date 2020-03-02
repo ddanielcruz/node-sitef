@@ -73,28 +73,21 @@ int leSimNaoPinPad(const char *mensagem)
   return escreveMensagem(mensagem);
 }
 
-Value iniciaFuncaoSiTefInterativo(const CallbackInfo &info)
+int iniciaFuncaoSiTefInterativo(int funcao, const char *valor, const char *cupomFiscal, const char *dataFiscal, const char *horaFiscal, const char *operador, const char *paramAdicionais)
 {
-  Env env = info.Env();
-
   if (!handler)
-  {
-    napi_throw_error(env, "-1", "Carregue a DLL do SiTef!");
-    return env.Null();
-  }
+    throw("Carregue a DLL do SiTef!");
 
   IniciaFuncaoSiTefInterativo iniciaFuncao = (IniciaFuncaoSiTefInterativo)dlsym(handler, "IniciaFuncaoSiTefInterativo");
 
-  int retorno = iniciaFuncao(
-      info[0].ToNumber().Int32Value(),
-      info[1].ToString().Utf8Value().c_str(),
-      info[2].ToString().Utf8Value().c_str(),
-      info[3].ToString().Utf8Value().c_str(),
-      info[4].ToString().Utf8Value().c_str(),
-      info[5].ToString().Utf8Value().c_str(),
-      info[6].ToString().Utf8Value().c_str());
-
-  return Number::New(env, retorno);
+  return iniciaFuncao(
+      funcao,
+      valor,
+      cupomFiscal,
+      dataFiscal,
+      horaFiscal,
+      operador,
+      paramAdicionais);
 }
 
 Value continuaFuncaoSiTefInterativo(const CallbackInfo &info)
@@ -185,7 +178,7 @@ Object Init(Env env, Object exports)
 
   exports.Set(
       String::New(env, "iniciaFuncaoSiTefInterativo"),
-      Function::New(env, iniciaFuncaoSiTefInterativo));
+      Function::New(env, IniciaFuncaoPromise::Create));
 
   exports.Set(
       String::New(env, "continuaFuncaoSiTefInterativo"),

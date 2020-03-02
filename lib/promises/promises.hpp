@@ -5,5 +5,6 @@
 #include "verificarPresencaPromise.cpp"
 #include "escreverMensagemPromise.cpp"
 #include "leSimNaoPromise.cpp"
+#include "iniciaFuncaoPromise.cpp"
 
 #endif
