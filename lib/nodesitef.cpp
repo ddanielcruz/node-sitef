@@ -90,46 +90,21 @@ int iniciaFuncaoSiTefInterativo(int funcao, const char *valor, const char *cupom
       paramAdicionais);
 }
 
-Value continuaFuncaoSiTefInterativo(const CallbackInfo &info)
+int continuaFuncaoSiTefInterativo(int *comando, long *tipoCampo, int *tamMinimo, int *tamMaximo, char *buffer, int tamBuffer, int continua)
 {
-  Env env = info.Env();
-
   if (!handler)
-  {
-    napi_throw_error(env, "-1", "Carregue a DLL do SiTef!");
-    return env.Null();
-  }
+    throw("Carregue a DLL do SiTef!");
 
   ContinuaFuncaoSiTefInterativo continuaFuncao = (ContinuaFuncaoSiTefInterativo)dlsym(handler, "ContinuaFuncaoSiTefInterativo");
 
-  int comando = info[0].ToNumber().Int32Value();
-  long tipoCampo = static_cast<long>(info[1].ToNumber().Int64Value());
-  int tamMinimo = info[2].ToNumber().Int32Value();
-  int tamMaximo = info[3].ToNumber().Int32Value();
-  int tamBuffer = info[5].ToNumber().Int32Value();
-  int continua = info[6].ToNumber().Int32Value();
-
-  char buffer[20000];
-  strcpy(buffer, info[4].ToString().Utf8Value().c_str());
-
-  int retorno = continuaFuncao(
-      &comando,
-      &tipoCampo,
-      &tamMinimo,
-      &tamMaximo,
+  return continuaFuncao(
+      comando,
+      tipoCampo,
+      tamMinimo,
+      tamMaximo,
       buffer,
       tamBuffer,
       continua);
-
-  Object obj = Object::New(env);
-  obj.Set("retorno", retorno);
-  obj.Set("comando", comando);
-  obj.Set("tipoCampo", tipoCampo);
-  obj.Set("tamMinimo", tamMinimo);
-  obj.Set("tamMaximo", tamMaximo);
-  obj.Set("buffer", buffer);
-
-  return obj;
 }
 
 void finalizaFuncaoSiTefInterativo(int confirma, const char *cupomFiscal, const char *dataFiscal, const char *horaFiscal, const char *paramAdicionais)
@@ -170,7 +145,7 @@ Object Init(Env env, Object exports)
 
   exports.Set(
       String::New(env, "continuaFuncaoSiTefInterativo"),
-      Function::New(env, continuaFuncaoSiTefInterativo));
+      Function::New(env, ContinuaFuncaoPromise::Create));
 
   exports.Set(
       String::New(env, "finalizaFuncaoSiTefInterativo"),

@@ -21,7 +21,7 @@ using std::string;
 
 #include "promises/promiseWorker.cpp"
 
-// Tipos dos métodos do PinPad
+// Tipos dos métodos do SiTef
 typedef int (*VerificaPresencaPinPad)();
 typedef int (*ConfiguraIntSiTefInterativo)(const char *, const char *, const char *, const char *);
 typedef int (*IniciaFuncaoSiTefInterativo)(int, const char *, const char *, const char *, const char *, const char *, const char *);
@@ -31,13 +31,13 @@ typedef int (*EscreveMensagemPermanentePinPad)(const char *);
 typedef int (*LeSimNaoPinPad)(const char *);
 
 Value carregarDLL(const CallbackInfo &info);
-Value continuaFuncaoSiTefInterativo(const CallbackInfo &info);
 
 int verificaPresencaPinPad();
 int configuraIntSiTefInterativo(const char *, const char *, const char *, const char *);
 int escreveMensagemPermanentePinPad(const char *);
 int leSimNaoPinPad(const char *);
 int iniciaFuncaoSiTefInterativo(int, const char *, const char *, const char *, const char *, const char *, const char *);
+int continuaFuncaoSiTefInterativo(int *comando, long *tipoCampo, int *tamMinimo, int *tamMaximo, char *buffer, int tamBuffer, int continua);
 void finalizaFuncaoSiTefInterativo(int confirma, const char *cupomFiscal, const char *dataFiscal, const char *horaFiscal, const char *paramAdicionais);
 
 #endif /* NODESITEF_H */
