@@ -1,5 +1,5 @@
 #include "nodesitef.hpp"
-#include "promises/configPromise.cpp"
+#include "promises/promises.hpp"
 
 void *handler;
 
@@ -43,19 +43,34 @@ int configuraIntSiTefInterativo(const char *ip, const char *terminal, const char
       reservado);
 }
 
-Value verificaPresencaPinPad(const CallbackInfo &info)
+int verificaPresencaPinPad()
 {
-  Env env = info.Env();
-
   if (!handler)
-  {
-    napi_throw_error(env, "-1", "Carregue a DLL do SiTef!");
-    return env.Null();
-  }
+    throw("Carregue a DLL do SiTef!");
 
   VerificaPresencaPinPad verificaPresenca = (VerificaPresencaPinPad)dlsym(handler, "VerificaPresencaPinPad");
 
-  return Number::New(env, verificaPresenca());
+  return verificaPresenca();
+}
+
+int escreveMensagemPermanentePinPad(const char *mensagem)
+{
+  if (!handler)
+    throw("Carregue a DLL do SiTef!");
+
+  EscreveMensagemPermanentePinPad escreveMensagem = (EscreveMensagemPermanentePinPad)dlsym(handler, "EscreveMensagemPermanentePinPad");
+
+  return escreveMensagem(mensagem);
+}
+
+int leSimNaoPinPad(const char *mensagem)
+{
+  if (!handler)
+    throw("Carregue a DLL do SiTef!");
+
+  LeSimNaoPinPad escreveMensagem = (LeSimNaoPinPad)dlsym(handler, "LeSimNaoPinPad");
+
+  return escreveMensagem(mensagem);
 }
 
 Value iniciaFuncaoSiTefInterativo(const CallbackInfo &info)
@@ -146,40 +161,6 @@ Value finalizaFuncaoSiTefInterativo(const CallbackInfo &info)
   return Boolean::New(env, true);
 }
 
-Value escreveMensagemPermanentePinPad(const CallbackInfo &info)
-{
-  Env env = info.Env();
-
-  if (!handler)
-  {
-    napi_throw_error(env, "-1", "Carregue a DLL do SiTef!");
-    return env.Null();
-  }
-
-  EscreveMensagemPermanentePinPad escreveMensagem = (EscreveMensagemPermanentePinPad)dlsym(handler, "EscreveMensagemPermanentePinPad");
-
-  int retorno = escreveMensagem(info[0].ToString().Utf8Value().c_str());
-
-  return Number::New(env, retorno);
-}
-
-Value leSimNaoPinPad(const CallbackInfo &info)
-{
-  Env env = info.Env();
-
-  if (!handler)
-  {
-    napi_throw_error(env, "-1", "Carregue a DLL do SiTef!");
-    return env.Null();
-  }
-
-  LeSimNaoPinPad escreveMensagem = (LeSimNaoPinPad)dlsym(handler, "LeSimNaoPinPad");
-
-  int retorno = escreveMensagem(info[0].ToString().Utf8Value().c_str());
-
-  return Number::New(env, retorno);
-}
-
 Object Init(Env env, Object exports)
 {
   exports.Set(
@@ -192,7 +173,15 @@ Object Init(Env env, Object exports)
 
   exports.Set(
       String::New(env, "verificaPresencaPinPad"),
-      Function::New(env, verificaPresencaPinPad));
+      Function::New(env, VerificarPresencaPromise::Create));
+
+  exports.Set(
+      String::New(env, "leSimNaoPinPad"),
+      Function::New(env, LeSimNaoPromise::Create));
+
+  exports.Set(
+      String::New(env, "escreveMensagemPermanentePinPad"),
+      Function::New(env, EscreverMensagemPromise::Create));
 
   exports.Set(
       String::New(env, "iniciaFuncaoSiTefInterativo"),
@@ -205,14 +194,6 @@ Object Init(Env env, Object exports)
   exports.Set(
       String::New(env, "finalizaFuncaoSiTefInterativo"),
       Function::New(env, finalizaFuncaoSiTefInterativo));
-
-  exports.Set(
-      String::New(env, "escreveMensagemPermanentePinPad"),
-      Function::New(env, escreveMensagemPermanentePinPad));
-
-  exports.Set(
-      String::New(env, "leSimNaoPinPad"),
-      Function::New(env, leSimNaoPinPad));
 
   return exports;
 }

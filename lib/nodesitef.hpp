@@ -19,6 +19,8 @@ using std::string;
 #ifndef NODESITEF_H // include guard
 #define NODESITEF_H 1
 
+#include "promises/promiseWorker.cpp"
+
 // Tipos dos métodos do PinPad
 typedef int (*VerificaPresencaPinPad)();
 typedef int (*ConfiguraIntSiTefInterativo)(const char *, const char *, const char *, const char *);
@@ -29,13 +31,13 @@ typedef int (*EscreveMensagemPermanentePinPad)(const char *);
 typedef int (*LeSimNaoPinPad)(const char *);
 
 Value carregarDLL(const CallbackInfo &info);
-Value verificaPresencaPinPad(const CallbackInfo &info);
 Value iniciaFuncaoSiTefInterativo(const CallbackInfo &info);
 Value continuaFuncaoSiTefInterativo(const CallbackInfo &info);
 Value finalizaFuncaoSiTefInterativo(const CallbackInfo &info);
-Value escreveMensagemPermanentePinPad(const CallbackInfo &info);
-Value leSimNaoPinPad(const CallbackInfo &info);
 
+int verificaPresencaPinPad();
 int configuraIntSiTefInterativo(const char *ip, const char *terminal, const char *loja, const char *reservado);
+int escreveMensagemPermanentePinPad(const char *mensagem);
+int leSimNaoPinPad(const char *mensagem);
 
 #endif /* NODESITEF_H */

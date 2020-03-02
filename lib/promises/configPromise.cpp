@@ -1,6 +1,4 @@
 #include <napi.h>
-#include <sstream>
-#include "promiseWorker.cpp"
 #include "../nodesitef.hpp"
 
 using std::string;
@@ -10,7 +8,7 @@ class ConfigPromise : public PromiseWorker<int>
 public:
   static Value Create(const CallbackInfo &info)
   {
-    if (info.Length() != 4)
+    if (info.Length() < 4)
       return Reject(info.Env(), "MissingArgument");
     else if (!info[0].IsString() || !info[1].IsString() || !info[2].IsString() || !info[3].IsString())
       return Reject(info.Env(), "InvalidArgument");
