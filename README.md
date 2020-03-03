@@ -1,6 +1,6 @@
 # Node SiTef
 
-Biblioteca Node.js **Não oficial** para interação com o **SiTef** através de sua DLL, utilizando [C++ Addons](https://nodejs.org/api/addons.html).
+Biblioteca Node.js **não oficial** para interação com o **SiTef** através de sua DLL, utilizando [C++ Addons](https://nodejs.org/api/addons.html).
 
 Todas as regras informadas na documentação do SiTef se mantém. O pacote é apenas um intermediário para a DLL, facilitando seu uso em **projetos Node.js**.
 
