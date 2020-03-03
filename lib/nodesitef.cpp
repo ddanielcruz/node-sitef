@@ -1,7 +1,14 @@
 #include "nodesitef.hpp"
 #include "promises/promises.hpp"
 
+
+#ifdef _WIN32
+HANDLE handler;
+#endif
+
+#ifdef linux
 void *handler;
+#endif
 
 Value carregarDLL(const CallbackInfo &info)
 {
@@ -17,7 +24,13 @@ Value carregarDLL(const CallbackInfo &info)
   else
   {
     string path = info[0].ToString().Utf8Value();
+    #ifdef _WIN32
+    handler = LoadLibrary(path.c_str());
+    #endif
+
+    #ifdef linux
     handler = dlopen(path.c_str(), RTLD_LAZY);
+    #endif
 
     if (!handler)
       napi_throw_type_error(env, "2", "Não foi possível carregar a DLL.");
@@ -34,7 +47,13 @@ int configuraIntSiTefInterativo(const char *ip, const char *terminal, const char
 
     throw("Carregue a DLL do SiTef!");
 
+  #ifdef _WIN32
+  ConfiguraIntSiTefInterativo configuraSitef = (ConfiguraIntSiTefInterativo)GetProcAddress(handler, "ConfiguraIntSiTefInterativo");
+  #endif
+
+  #ifdef linux
   ConfiguraIntSiTefInterativo configuraSitef = (ConfiguraIntSiTefInterativo)dlsym(handler, "ConfiguraIntSiTefInterativo");
+  #endif
 
   return configuraSitef(
       ip,
@@ -48,7 +67,13 @@ int verificaPresencaPinPad()
   if (!handler)
     throw("Carregue a DLL do SiTef!");
 
+  #ifdef _WIN32
+  VerificaPresencaPinPad verificaPresenca = (VerificaPresencaPinPad)GetProcAddress(handler, "VerificaPresencaPinPad");
+  #endif
+
+  #ifdef linux
   VerificaPresencaPinPad verificaPresenca = (VerificaPresencaPinPad)dlsym(handler, "VerificaPresencaPinPad");
+  #endif
 
   return verificaPresenca();
 }
@@ -58,7 +83,13 @@ int escreveMensagemPermanentePinPad(const char *mensagem)
   if (!handler)
     throw("Carregue a DLL do SiTef!");
 
+  #ifdef _WIN32
+  EscreveMensagemPermanentePinPad escreveMensagem = (EscreveMensagemPermanentePinPad)GetProcAddress(handler, "EscreveMensagemPermanentePinPad");
+  #endif
+
+  #ifdef linux
   EscreveMensagemPermanentePinPad escreveMensagem = (EscreveMensagemPermanentePinPad)dlsym(handler, "EscreveMensagemPermanentePinPad");
+  #endif
 
   return escreveMensagem(mensagem);
 }
@@ -68,7 +99,13 @@ int leSimNaoPinPad(const char *mensagem)
   if (!handler)
     throw("Carregue a DLL do SiTef!");
 
+  #ifdef _WIN32
+  LeSimNaoPinPad escreveMensagem = (LeSimNaoPinPad)GetProcAddress(handler, "LeSimNaoPinPad");
+  #endif
+
+  #ifdef linux
   LeSimNaoPinPad escreveMensagem = (LeSimNaoPinPad)dlsym(handler, "LeSimNaoPinPad");
+  #endif
 
   return escreveMensagem(mensagem);
 }
@@ -78,7 +115,13 @@ int iniciaFuncaoSiTefInterativo(int funcao, const char *valor, const char *cupom
   if (!handler)
     throw("Carregue a DLL do SiTef!");
 
+  #ifdef _WIN32
+  IniciaFuncaoSiTefInterativo iniciaFuncao = (IniciaFuncaoSiTefInterativo)GetProcAddress(handler, "IniciaFuncaoSiTefInterativo");
+  #endif
+
+  #ifdef linux
   IniciaFuncaoSiTefInterativo iniciaFuncao = (IniciaFuncaoSiTefInterativo)dlsym(handler, "IniciaFuncaoSiTefInterativo");
+  #endif
 
   return iniciaFuncao(
       funcao,
@@ -95,7 +138,13 @@ int continuaFuncaoSiTefInterativo(int *comando, long *tipoCampo, int *tamMinimo,
   if (!handler)
     throw("Carregue a DLL do SiTef!");
 
+  #ifdef _WIN32
+  ContinuaFuncaoSiTefInterativo continuaFuncao = (ContinuaFuncaoSiTefInterativo)GetProcAddress(handler, "ContinuaFuncaoSiTefInterativo");
+  #endif
+
+  #ifdef linux
   ContinuaFuncaoSiTefInterativo continuaFuncao = (ContinuaFuncaoSiTefInterativo)dlsym(handler, "ContinuaFuncaoSiTefInterativo");
+  #endif
 
   return continuaFuncao(
       comando,
@@ -113,7 +162,14 @@ void finalizaFuncaoSiTefInterativo(int confirma, const char *cupomFiscal, const 
 
     throw("Carregue a DLL do SiTef!");
 
+  #ifdef _WIN32
+  FinalizaFuncaoSiTefInterativo finalizaFuncao = (FinalizaFuncaoSiTefInterativo)GetProcAddress(handler, "FinalizaFuncaoSiTefInterativo");
+  #endif
+
+  #ifdef linux
   FinalizaFuncaoSiTefInterativo finalizaFuncao = (FinalizaFuncaoSiTefInterativo)dlsym(handler, "FinalizaFuncaoSiTefInterativo");
+  #endif
+  
   finalizaFuncao(confirma, cupomFiscal, dataFiscal, horaFiscal, paramAdicionais);
 }
 

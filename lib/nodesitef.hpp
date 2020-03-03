@@ -1,7 +1,14 @@
 #include <napi.h>
 #include <string.h>
-#include <dlfcn.h>
 #include <iostream>
+
+#ifdef _WIN32
+    #include <windows.h>
+#endif
+#ifdef linux
+    #include <dlfcn.h>
+#endif
+
 
 using Napi::Boolean;
 using Napi::CallbackInfo;
