@@ -3,7 +3,7 @@
 
 
 #ifdef _WIN32
-HANDLE handler;
+HMODULE handler;
 #endif
 
 #ifdef linux
