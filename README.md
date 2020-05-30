@@ -8,6 +8,14 @@
   </p>
 </div>
 
+<br>
+
+<div align="center">
+
+<img alt="npm" src="https://img.shields.io/npm/v/node-sitef?color=%23cb3837">
+
+</div>
+
 ## Configuração
 
 Após adicionar o pacote, no **root do seu projeto**, adicione o arquivo `CliSiTef.ini` para configurar o SiTef. Ele deve ser adicionado no root para que a biblioteca possa encontrá-lo.
