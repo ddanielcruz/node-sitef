@@ -4,7 +4,7 @@
   </h1>
 
   <p>
-  Portabilidade do SiTef para aplicações JavaScript
+  Portabilidade das DLLs do SiTef para aplicações JavaScript utilizando Node Addons
   </p>
 
 [![npm](https://img.shields.io/npm/v/node-sitef)](https://www.npmjs.com/package/node-sitef)
@@ -45,6 +45,11 @@ const client = new SiTef(dllPath);
 ```
 
 Após instanciado basta utilizar as funções da DLL. Para mais informações basta acessar a [Wiki](https://github.com/danielccunha/node-sitef/wiki) do projeto (em desenvolvimento).
+
+## Tecnologias
+
+- [Node.js](https://nodejs.org/en/)
+- [Software Express](https://www.softwareexpress.com.br/)
 
 ## Como contribuir
 
