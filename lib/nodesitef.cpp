@@ -169,7 +169,7 @@ void finalizaFuncaoSiTefInterativo(int confirma, const char *cupomFiscal, const 
   #ifdef linux
   FinalizaFuncaoSiTefInterativo finalizaFuncao = (FinalizaFuncaoSiTefInterativo)dlsym(handler, "FinalizaFuncaoSiTefInterativo");
   #endif
-  
+
   finalizaFuncao(confirma, cupomFiscal, dataFiscal, horaFiscal, paramAdicionais);
 }
 

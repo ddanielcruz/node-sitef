@@ -1,29 +1,12 @@
-# Node SiTef
+<div align="center">
+  <h1>
+   <i>node-sitef</i>
+  </h1>
 
-Biblioteca Node.js **não oficial** para interação com o **SiTef** através de sua DLL, utilizando [C++ Addons](https://nodejs.org/api/addons.html).
-
-Todas as regras informadas na documentação do SiTef se mantém. O pacote é apenas um intermediário para a DLL, facilitando seu uso em **projetos Node.js**.
-
-## Documentação
-
-- [Node SiTef](#node-sitef)
-  - [Documentação](#documenta%c3%a7%c3%a3o)
-  - [Importante!](#importante)
-  - [Configuração](#configura%c3%a7%c3%a3o)
-  - [Utilização](#utiliza%c3%a7%c3%a3o)
-    - [Configuração](#configura%c3%a7%c3%a3o-1)
-    - [Verificação de presença](#verifica%c3%a7%c3%a3o-de-presen%c3%a7a)
-    - [Escrever mensagem](#escrever-mensagem)
-    - [Iniciar função](#iniciar-fun%c3%a7%c3%a3o)
-    - [Continuar função](#continuar-fun%c3%a7%c3%a3o)
-    - [Finalizar função](#finalizar-fun%c3%a7%c3%a3o)
-    - [Confirmação do usuário](#confirma%c3%a7%c3%a3o-do-usu%c3%a1rio)
-  - [Contribuidores](#contribuidores)
-  - [Licença](#licen%c3%a7a)
-
-## Importante!
-
-O pacote está em fase de **desenvolvimento** e por enquanto só foi testado utilizando Linux x64. Em outros sistemas, como o Windows, ele pode não funcionar devido o mapeamento em C++.
+  <p>
+  Portabilidade do SiTef para aplicações JavaScript
+  </p>
+</div>
 
 ## Configuração
 
@@ -38,12 +21,12 @@ Por fim, crie uma pasta `bin` na sua aplicação (ou algum outro nome de sua pre
 O pacote possui apenas uma única classe a qual irá representar o SiTef. Através dela que serão realizadas todas as operações. Para utilizar o pacote, basta importá-lo e instanciar um novo SiTef passando como parâmetro o caminho para a DLL:
 
 ```javascript
-const path = require("path");
+const path = require('path');
 
-const CliSiTef = require("node-sitef");
+const CliSiTef = require('node-sitef');
 
 // Caminho absoluto para a DLL do SiTef
-const dllPath = path.resolve(__dirname, "..", "bin", "libclisitef.so");
+const dllPath = path.resolve(__dirname, '..', 'bin', 'libclisitef.so');
 const sitef = new CliSiTef(dllPath);
 ```
 
@@ -54,10 +37,10 @@ Para configurar o PinPad basta chamar o método `configurar`, mapeamento da fun�
 ```javascript
 // Parâmetro obrigatórios
 const parametros = {
-  ip: "0.0.0.0",
-  loja: "00000000",
-  terminal: "00000000",
-  reservado: ""
+  ip: '0.0.0.0',
+  loja: '00000000',
+  terminal: '00000000',
+  reservado: '',
 };
 
 const retorno = await sitef.configurar(parametros);
@@ -78,7 +61,7 @@ const retorno = await sitef.verificarPresenca();
 A função `EscreveMensagemPermanentePinPad` está mapeada como `escreverMensagem`. Ela recebe apenas um parâmetro que é a mensagem que deve ser uma `String` e retorna uma `Promise`, que quando concluída irá retornar o código de retorno da escrita da mensagem.
 
 ```javascript
-const retorno = await sitef.escreverMensagem("Lorem ipsum");
+const retorno = await sitef.escreverMensagem('Lorem ipsum');
 ```
 
 ### Iniciar função
@@ -88,12 +71,12 @@ A função `IniciaFuncaoSiTefInterativo` está mapeada como `iniciarFuncao`. Ela
 ```javascript
 const parametros = {
   funcao: 0,
-  valor: "100,00",
-  cupomFiscal: "",
-  dataFiscal: "",
-  horaFiscal: "",
-  operador: "",
-  parametros: ""
+  valor: '100,00',
+  cupomFiscal: '',
+  dataFiscal: '',
+  horaFiscal: '',
+  operador: '',
+  parametros: '',
 };
 
 const retorno = await sitef.iniciarFuncao(parametros);
@@ -137,11 +120,11 @@ A função `FinalizaFuncaoSiTefInterativo` está mapeada como `finalizarFuncao`.
 
 ```javascript
 const parametros = {
-  confirma: "",
-  cupomFiscal: "",
-  dataFiscal: "",
-  horaFiscal: "",
-  parametros: ""
+  confirma: '',
+  cupomFiscal: '',
+  dataFiscal: '',
+  horaFiscal: '',
+  parametros: '',
 };
 
 const retorno = await sitef.finalizarFuncao(parametros);
@@ -152,7 +135,7 @@ const retorno = await sitef.finalizarFuncao(parametros);
 A função `LeSimNaoPinPad` está mapeada como `leSimNaoPinPad`. Sua única diferença é que ela é assíncrona e retorna uma `Promise` contendo o resultado da operação.
 
 ```javascript
-const resposta = await sitef.leSimNaoPinPad("Lorem ipsum?");
+const resposta = await sitef.leSimNaoPinPad('Lorem ipsum?');
 ```
 
 ## Contribuidores
@@ -160,7 +143,7 @@ const resposta = await sitef.leSimNaoPinPad("Lorem ipsum?");
 <table>
   <tr>
     <td align="center"><a href="https://github.com/danielccunha"><img src="https://avatars2.githubusercontent.com/u/32555455?s=460&v=4" width="100px;" alt="Daniel Cunha"/><br /><sub><b>Daniel Cunha</b></sub></a></td>
-    <td align="center"><a href="https://github.com/fefurst"><img src="https://avatars.githubusercontent.com/u/16591705?v=4" width="100px;" alt="Felipe Furst"/><br /><sub><b>Felipe Furst</b></sub></a></td>    
+    <td align="center"><a href="https://github.com/fefurst"><img src="https://avatars.githubusercontent.com/u/16591705?v=4" width="100px;" alt="Felipe Furst"/><br /><sub><b>Felipe Furst</b></sub></a></td>
   </tr>
 </table>
 
