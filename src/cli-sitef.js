@@ -1,6 +1,6 @@
-const sitefLib = require("bindings")("nodesitef");
+const sitefLib = require('bindings')('nodesitef');
 
-const createPromise = handler => {
+const createPromise = (handler) => {
   return new Promise((resolve, reject) => {
     try {
       const value = handler();
@@ -14,14 +14,14 @@ const createPromise = handler => {
 module.exports = class CliSiTef {
   constructor(path) {
     if (!path) {
-      throw new Error("Informe o caminho absoluto para a DLL do SiTef.");
+      throw new Error('Informe o caminho absoluto para a DLL do SiTef.');
     }
 
     sitefLib.carregarDLL(path);
   }
 
   teste({ ip, loja, terminal, reservado }) {
-    return sitefLib.teste(ip, loja, terminal, reservado)
+    return sitefLib.teste(ip, loja, terminal, reservado);
   }
 
   configurar({ ip, loja, terminal, reservado }) {
@@ -36,7 +36,7 @@ module.exports = class CliSiTef {
 
   escreverMensagem(mensagem) {
     return createPromise(() =>
-      sitefLib.escreveMensagemPermanentePinPad(mensagem || "")
+      sitefLib.escreveMensagemPermanentePinPad(mensagem || '')
     );
   }
 
@@ -47,17 +47,17 @@ module.exports = class CliSiTef {
     dataFiscal,
     horaFiscal,
     operador,
-    parametros
+    parametros,
   }) {
     return createPromise(() =>
       sitefLib.iniciaFuncaoSiTefInterativo(
         funcao,
-        valor || "",
+        valor || '',
         cupomFiscal,
         dataFiscal,
         horaFiscal,
         operador,
-        parametros || ""
+        parametros || ''
       )
     );
   }
@@ -69,7 +69,7 @@ module.exports = class CliSiTef {
     tamMaximo,
     buffer,
     tamBuffer,
-    continua
+    continua,
   }) {
     return createPromise(() =>
       sitefLib.continuaFuncaoSiTefInterativo(
@@ -89,7 +89,7 @@ module.exports = class CliSiTef {
     cupomFiscal,
     dataFiscal,
     horaFiscal,
-    parametros
+    parametros,
   }) {
     return createPromise(() =>
       sitefLib.finalizaFuncaoSiTefInterativo(

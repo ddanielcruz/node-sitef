@@ -14,4 +14,4 @@ Em seguida, adicione as DLLs do SiTef na pasta **bin** (pasta vazia com apenas u
 
 Por fim, altere os parâmetros de configuração do arquivo `config/index.js`. O exemplo básico não necessita desses parâmetros, porém o cliente precisa para realizar a função. Segue exemplo de como deve ficar a estrutura:
 
-![Configuração dos exemplos](../assets/images/config-exemplos.png)
+![Configuração dos exemplos](../.github/images/config-exemplos.png)

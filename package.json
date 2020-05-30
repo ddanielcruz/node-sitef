@@ -3,38 +3,33 @@
   "version": "1.1.0",
   "repository": "https://github.com/danielccunha/node-sitef",
   "homepage": "https://github.com/danielccunha/node-sitef",
-  "author": "Daniel Cunha <danielcunha54@gmail.com> (https://github.com/danielccunha)",
+  "author": {
+    "name": "Daniel Cunha",
+    "email": "danielcunha54@gmail.com",
+    "url": "https://github.com/danielccunha"
+  },
   "license": "GPL-3.0",
   "bugs": "https://github.com/danielccunha/node-sitef/issues",
   "main": "src/cli-sitef.js",
-  "keywords": [
-    "sitef",
-    "pagamento",
-    "pinpad",
-    "software-express"
-  ],
-  "scripts": {
-    "basic": "node example/basic",
-    "basic-watch": "nodemon example/basic",
-    "client": "node example/client",
-    "client-watch": "nodemon example/client"
-  },
   "dependencies": {
     "bindings": "^1.5.0",
     "node-addon-api": "^2.0.0"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "chalk": "^3.0.0",
-    "expect": "^24.9.0",
-    "mocha": "^6.2.2",
-    "moment": "^2.24.0",
+    "eslint": "^7.1.0",
     "node-gyp": "^6.0.1",
-    "nodemon": "^2.0.2",
     "readline": "^1.3.0"
   },
   "contributors": [
-    "Daniel Cunha <danielcunha54@gmail.com> (https://github.com/danielccunha)",
-    "Felipe Furst <fefurst@gmail.com> (https://github.com/fefurst)"
+    {
+      "name": "Daniel Cunha",
+      "email": "danielcunha54@gmail.com",
+      "url": "https://github.com/danielccunha"
+    },
+    {
+      "name": "Felipe Furst",
+      "email": "fefurst@gmail.com",
+      "url": "https://github.com/fefurst"
+    }
   ]
 }
