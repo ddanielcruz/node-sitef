@@ -6,146 +6,60 @@
   <p>
   Portabilidade do SiTef para aplicações JavaScript
   </p>
-  
-  <img alt="npm" src="https://img.shields.io/npm/v/node-sitef">
+
+[![npm](https://img.shields.io/npm/v/node-sitef)](https://www.npmjs.com/package/node-sitef)
+
 </div>
+
+A biblioteca consiste da portabilidade da DLL do [SiTef](https://www.softwareexpress.com.br/index.php?a=1590867134) para aplicações JavaScript. Ela foi desenvolvida em C++ portando para uma classe JavaScript utilizando [Node Addons](https://nodejs.org/api/addons.html).
+
+## Instalação
+
+```sh
+# Caso esteja utilizando yarn
+yarn add node-sitef
+
+# Caso esteja utilizando npm
+npm install node-sitef
+```
 
 ## Configuração
 
-Após adicionar o pacote, no **root do seu projeto**, adicione o arquivo `CliSiTef.ini` para configurar o SiTef. Ele deve ser adicionado no root para que a biblioteca possa encontrá-lo.
+Após adicionar o pacote, no **root** do seu projeto, adicione o arquivo `CliSiTef.ini` para configurar o SiTef. Ele deve ser adicionado no root para que a biblioteca possa encontrá-lo.
 
 Este passo é muito importante, pois, mesmo que você consiga instanciar o objeto do SiTef, quando você tentar executar qualquer função será retornado zero (sucesso). O motivo disso é desconhecido, é uma particularidade da biblioteca.
 
-Por fim, crie uma pasta `bin` na sua aplicação (ou algum outro nome de sua preferência) e adicione as DLLs do SiTef. Elas serão referenciadas posteriormente.
+Por fim, crie uma pasta `bin` na sua aplicação (ou algum outro nome de sua preferência) e adicione as DLLs do SiTef. Elas serão utilizadas para instanciar o client.
 
 ## Utilização
 
-O pacote possui apenas uma única classe a qual irá representar o SiTef. Através dela que serão realizadas todas as operações. Para utilizar o pacote, basta importá-lo e instanciar um novo SiTef passando como parâmetro o caminho para a DLL:
+Para utilizar a biblioteca basta importá-la e instanciar o client informando o caminho para as DLLs do SiTef. Através do client que serão realizadas todas as funções do SiTef.
 
-```javascript
+```js
 const path = require('path');
+const SiTef = require('node-sitef');
 
-const CliSiTef = require('node-sitef');
-
-// Caminho absoluto para a DLL do SiTef
+// Cria o caminho para as DLLs
 const dllPath = path.resolve(__dirname, '..', 'bin', 'libclisitef.so');
-const sitef = new CliSiTef(dllPath);
+const client = new SiTef(dllPath);
 ```
 
-### Configuração
+Após instanciado basta utilizar as funções da DLL. Para mais informações basta acessar a [Wiki](https://github.com/danielccunha/node-sitef/wiki) do projeto (em desenvolvimento).
 
-Para configurar o PinPad basta chamar o método `configurar`, mapeamento da função `ConfiguraIntSiTefInterativo`. O método recebe um objeto possuindo os parâmetros de configuração, como no seguinte exemplo:
+## Como contribuir
 
-```javascript
-// Parâmetro obrigatórios
-const parametros = {
-  ip: '0.0.0.0',
-  loja: '00000000',
-  terminal: '00000000',
-  reservado: '',
-};
-
-const retorno = await sitef.configurar(parametros);
-```
-
-Seu retorno é uma `Promise`, que quando concluída irá retornar o código de retorno da função. Os códigos de retorno deste e dos demais métodos são os mesmos da documentação do SiTef.
-
-### Verificação de presença
-
-A função `VerificaPresencaPinPad` está mapeada como `verificarPresenca`. Ela também retorna uma `Promise`, e quando concluída irá retornar o código de retorno da verificação.
-
-```javascript
-const retorno = await sitef.verificarPresenca();
-```
-
-### Escrever mensagem
-
-A função `EscreveMensagemPermanentePinPad` está mapeada como `escreverMensagem`. Ela recebe apenas um parâmetro que é a mensagem que deve ser uma `String` e retorna uma `Promise`, que quando concluída irá retornar o código de retorno da escrita da mensagem.
-
-```javascript
-const retorno = await sitef.escreverMensagem('Lorem ipsum');
-```
-
-### Iniciar função
-
-A função `IniciaFuncaoSiTefInterativo` está mapeada como `iniciarFuncao`. Ela possui o mesmo funcionamento da função padrão, porém recebe os parâmetros em um objeto e retorna uma `Promise`, que quando concluída irá retornar o código de retorno.
-
-```javascript
-const parametros = {
-  funcao: 0,
-  valor: '100,00',
-  cupomFiscal: '',
-  dataFiscal: '',
-  horaFiscal: '',
-  operador: '',
-  parametros: '',
-};
-
-const retorno = await sitef.iniciarFuncao(parametros);
-```
-
-As regras de negócio da documentação do SiTef se mantém, portanto os dados devem ser informados no mesmo formato requisitado.
-
-### Continuar função
-
-A função `ContinuaFuncaoSiTefInterativo` está mapeada como `continuarFuncao`. O funcionamento do método é o mesmo da função mapeada. Entretanto, existem duas diferenças importantes.
-
-A primeira é que o método recebe os parâmetros como um objeto da mesma forma como os demais métodos. A segunda é que o retorno da `Promise` desta vez não é um literal e sim um objeto.
-
-O motivo de retornar um objeto é porque a função possui parâmetros que são alterados por referência (citados na documentação). Por esse motivo, é retornado um objeto contendo esses valores alterados e o código de retorno da função.
-
-```javascript
-const parametros = {
-  comando = 0,
-  tipoCampo = 0,
-  tamMinimo = 0,
-  tamMaximo = 0,
-  buffer = "",
-  tamBuffer = 0,
-  continua = 0
-};
-
-// Campos retornados no objeto, referentes os parâmetros alterados por referência
-const {
-  retorno,
-  comando,
-  tipoCampo,
-  tamMinimo,
-  tamMaximo,
-  buffer
-} = await sitef.continuarFuncao(parametros);
-```
-
-### Finalizar função
-
-A função `FinalizaFuncaoSiTefInterativo` está mapeada como `finalizarFuncao`. Da mesma maneira que o método `iniciarFuncao`, suas únicas diferenças são os parâmetros informados como objeto e o seu retorno encapsulado em uma `Promise`.
-
-```javascript
-const parametros = {
-  confirma: '',
-  cupomFiscal: '',
-  dataFiscal: '',
-  horaFiscal: '',
-  parametros: '',
-};
-
-const retorno = await sitef.finalizarFuncao(parametros);
-```
-
-### Confirmação do usuário
-
-A função `LeSimNaoPinPad` está mapeada como `leSimNaoPinPad`. Sua única diferença é que ela é assíncrona e retorna uma `Promise` contendo o resultado da operação.
-
-```javascript
-const resposta = await sitef.leSimNaoPinPad('Lorem ipsum?');
-```
+1. Faça o fork do projeto
+2. Crie uma branch para sua modificação (`git checkout -b feature/AmazingFeature`)
+3. Faça o commit (`git commit -am 'Add some amazing feature'`)
+4. Push (`git push origin feature/AmazingFeature`)
+5. Crie um novo Pull Request
 
 ## Contribuidores
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/danielccunha"><img src="https://avatars2.githubusercontent.com/u/32555455?s=460&v=4" width="100px;" alt="Daniel Cunha"/><br /><sub><b>Daniel Cunha</b></sub></a></td>
-    <td align="center"><a href="https://github.com/fefurst"><img src="https://avatars.githubusercontent.com/u/16591705?v=4" width="100px;" alt="Felipe Furst"/><br /><sub><b>Felipe Furst</b></sub></a></td>
+    <td align="center"><a href="https://github.com/danielccunha"><img src="https://avatars2.githubusercontent.com/u/32555455?s=460&v=4" width="50px;" alt="Daniel Cunha"/><br /><sub><b>Daniel Cunha</b></sub></a></td>
+    <td align="center"><a href="https://github.com/fefurst"><img src="https://avatars.githubusercontent.com/u/16591705?v=4" width="50px;" alt="Felipe Furst"/><br /><sub><b>Felipe Furst</b></sub></a></td>
   </tr>
 </table>
 
