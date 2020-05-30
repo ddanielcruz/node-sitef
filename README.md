@@ -1,19 +1,13 @@
 <div align="center">
   <h1>
-   <i>node-sitef</i>
+   :credit_card: <i>node-sitef</i>
   </h1>
 
   <p>
   Portabilidade do SiTef para aplicações JavaScript
   </p>
-</div>
-
-<br>
-
-<div align="center">
-
-<img alt="npm" src="https://img.shields.io/npm/v/node-sitef?color=%23cb3837">
-
+  
+  <img alt="npm" src="https://img.shields.io/npm/v/node-sitef">
 </div>
 
 ## Configuração
