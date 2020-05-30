@@ -63,8 +63,8 @@ Após instanciado basta utilizar as funções da DLL. Para mais informações ba
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/danielccunha"><img src="https://avatars2.githubusercontent.com/u/32555455?s=460&v=4" width="50px;" alt="Daniel Cunha"/><br /><sub><b>Daniel Cunha</b></sub></a></td>
-    <td align="center"><a href="https://github.com/fefurst"><img src="https://avatars.githubusercontent.com/u/16591705?v=4" width="50px;" alt="Felipe Furst"/><br /><sub><b>Felipe Furst</b></sub></a></td>
+    <td align="center"><a href="https://github.com/danielccunha"><img src="https://avatars2.githubusercontent.com/u/32555455?s=460&v=4" width="75px;" alt="Daniel Cunha"/><br /><sub><b>Daniel Cunha</b></sub></a></td>
+    <td align="center"><a href="https://github.com/fefurst"><img src="https://avatars.githubusercontent.com/u/16591705?v=4" width="75px;" alt="Felipe Furst"/><br /><sub><b>Felipe Furst</b></sub></a></td>
   </tr>
 </table>
 
