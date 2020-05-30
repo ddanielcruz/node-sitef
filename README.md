@@ -44,11 +44,12 @@ const dllPath = path.resolve(__dirname, '..', 'bin', 'libclisitef.so');
 const client = new SiTef(dllPath);
 ```
 
-Após instanciado basta utilizar as funções da DLL. Para mais informações basta acessar a [Wiki](https://github.com/danielccunha/node-sitef/wiki) do projeto (em desenvolvimento).
+Após instanciado basta utilizar as funções da DLL. Para mais informações basta acessar a [Wiki](https://github.com/danielccunha/node-sitef/wiki) do projeto.
 
 ## Tecnologias
 
 - [Node.js](https://nodejs.org/en/)
+- [C++ Addons](https://nodejs.org/api/addons.html)
 - [Software Express](https://www.softwareexpress.com.br/)
 
 ## Como contribuir

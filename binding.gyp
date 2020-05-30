@@ -1,7 +1,7 @@
 {
   "targets": [
     {
-      "target_name": "nodesitef",
+      "target_name": "node-sitef",
       "cflags!": [ "-fno-exceptions" ],
       "cflags_cc!": [ "-fno-exceptions" ],
       "msvs_settings": {
@@ -10,7 +10,7 @@
       "conditions": [
         ['OS=="win"', { "defines": [ "_HAS_EXCEPTIONS=1" ] }]
       ],
-      "sources": [ 
+      "sources": [
         "lib/promises/*",
         "lib/nodesitef.hpp",
         "lib/nodesitef.cpp"

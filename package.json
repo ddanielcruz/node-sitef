@@ -1,6 +1,6 @@
 {
   "name": "node-sitef",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "repository": "https://github.com/danielccunha/node-sitef",
   "homepage": "https://github.com/danielccunha/node-sitef",
   "author": {
@@ -10,7 +10,7 @@
   },
   "license": "GPL-3.0",
   "bugs": "https://github.com/danielccunha/node-sitef/issues",
-  "main": "src/cli-sitef.js",
+  "main": "src/SiTef.js",
   "dependencies": {
     "bindings": "^1.5.0",
     "node-addon-api": "^2.0.0"
