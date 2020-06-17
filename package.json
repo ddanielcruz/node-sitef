@@ -10,11 +10,11 @@
   },
   "license": "GPL-3.0",
   "bugs": "https://github.com/danielccunha/node-sitef/issues",
-  "main": "src/SiTef.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "example:basic": "node example/basic",
-    "example:client": "node example/client"
+    "example:basic": "tsc && node example/basic",
+    "example:client": "tsc && node example/client"
   },
   "dependencies": {
     "bindings": "^1.5.0",

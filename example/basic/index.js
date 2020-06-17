@@ -1,7 +1,7 @@
 const path = require('path');
 const chalk = require('chalk');
 
-const SiTef = require('../../src/SiTef');
+const SiTef = require('../../dist').default;
 const config = require('../shared/config');
 const { messages } = require('../shared/utils');
 

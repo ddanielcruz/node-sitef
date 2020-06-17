@@ -1,4 +1,5 @@
 import bindings from 'bindings';
+
 import {
   ILibrary,
   IParametrosConfiguracao,
@@ -7,55 +8,56 @@ import {
   IParametrosFinalizarFuncao,
   IResultadoContinuarFuncao,
 } from './types';
+import { createPromise } from './utils';
+
+const library: ILibrary = bindings('node-sitef');
 
 export default class SiTef {
-  private library: ILibrary = bindings('node-sitef');
-
   constructor(path: string) {
     if (!path) {
       throw new Error('Informe o caminho para as DLLs do SiTef.');
     }
 
-    const result = this.library.carregarDLL(path);
+    const result = library.carregarDLL(path);
     if (!result) {
       throw new Error('Não foi possível carregar as DLLs do SiTef.');
     }
   }
 
-  configurar = (parametros: IParametrosConfiguracao): Promise<number> => {
+  configurar(parametros: IParametrosConfiguracao): Promise<number> {
     const { ip, loja, terminal, reservado } = parametros;
 
-    return this.criarPromise<number>(() => {
-      return this.library.configuraIntSiTefInterativo(
+    return createPromise<number>(() => {
+      return library.configuraIntSiTefInterativo(
         ip,
         loja,
         terminal,
         reservado || ''
       );
     });
-  };
+  }
 
-  verificarPresenca = (): Promise<number> => {
-    return this.criarPromise<number>(() => {
-      return this.library.verificaPresencaPinPad();
+  verificarPresenca(): Promise<number> {
+    return createPromise<number>(() => {
+      return library.verificaPresencaPinPad();
     });
-  };
+  }
 
-  escreverMensagem = (mensagem: string): Promise<number> => {
-    return this.criarPromise<number>(() => {
-      return this.library.escreveMensagemPermanentePinPad(mensagem);
+  escreverMensagem(mensagem: string): Promise<number> {
+    return createPromise<number>(() => {
+      return library.escreveMensagemPermanentePinPad(mensagem);
     });
-  };
+  }
 
-  leSimNaoPinPad = (mensagem: string): Promise<number> => {
-    return this.criarPromise<number>(() => {
-      return this.library.leSimNaoPinPad(mensagem);
+  leSimNaoPinPad(mensagem: string): Promise<number> {
+    return createPromise<number>(() => {
+      return library.leSimNaoPinPad(mensagem);
     });
-  };
+  }
 
-  iniciarFuncao = (parametros: IParametrosIniciarFuncao): Promise<number> => {
-    return this.criarPromise<number>(() => {
-      return this.library.iniciaFuncaoSiTefInterativo(
+  iniciarFuncao(parametros: IParametrosIniciarFuncao): Promise<number> {
+    return createPromise<number>(() => {
+      return library.iniciaFuncaoSiTefInterativo(
         parametros.funcao,
         parametros.valor || '',
         parametros.cupomFiscal,
@@ -65,13 +67,13 @@ export default class SiTef {
         parametros.parametros || ''
       );
     });
-  };
+  }
 
-  continuarFuncao = (
+  continuarFuncao(
     parametros: IParametrosContinuarFuncao
-  ): Promise<IResultadoContinuarFuncao> => {
-    return this.criarPromise<IResultadoContinuarFuncao>(() => {
-      return this.library.continuaFuncaoSiTefInterativo(
+  ): Promise<IResultadoContinuarFuncao> {
+    return createPromise<IResultadoContinuarFuncao>(() => {
+      return library.continuaFuncaoSiTefInterativo(
         parametros.comando,
         parametros.tipoCampo,
         parametros.tamMinimo,
@@ -81,30 +83,17 @@ export default class SiTef {
         parametros.continua
       );
     });
-  };
+  }
 
-  finalizarFuncao = (
-    parametros: IParametrosFinalizarFuncao
-  ): Promise<boolean> => {
-    return this.criarPromise<boolean>(() => {
-      return this.library.finalizaFuncaoSiTefInterativo(
+  finalizarFuncao(parametros: IParametrosFinalizarFuncao): Promise<boolean> {
+    return createPromise<boolean>(() => {
+      return library.finalizaFuncaoSiTefInterativo(
         parametros.confirma,
         parametros.cupomFiscal,
         parametros.dataFiscal,
         parametros.horaFiscal,
         parametros.parametros
       );
-    });
-  };
-
-  private criarPromise<T = void>(handler: Function) {
-    return new Promise<T>((resolve, reject) => {
-      try {
-        const value = handler();
-        resolve(value);
-      } catch (error) {
-        reject(error);
-      }
     });
   }
 }
