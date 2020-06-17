@@ -1,5 +1,12 @@
 import bindings from 'bindings';
-import { ILibrary, IParametrosConfiguracao } from './types';
+import {
+  ILibrary,
+  IParametrosConfiguracao,
+  IParametrosIniciarFuncao,
+  IParametrosContinuarFuncao,
+  IParametrosFinalizarFuncao,
+  IResultadoContinuarFuncao,
+} from './types';
 
 export default class SiTef {
   private library: ILibrary = bindings('node-sitef');
@@ -43,6 +50,50 @@ export default class SiTef {
   leSimNaoPinPad = (mensagem: string): Promise<number> => {
     return this.criarPromise<number>(() => {
       return this.library.leSimNaoPinPad(mensagem);
+    });
+  };
+
+  iniciarFuncao = (parametros: IParametrosIniciarFuncao): Promise<number> => {
+    return this.criarPromise<number>(() => {
+      return this.library.iniciaFuncaoSiTefInterativo(
+        parametros.funcao,
+        parametros.valor || '',
+        parametros.cupomFiscal,
+        parametros.dataFiscal,
+        parametros.horaFiscal,
+        parametros.operador,
+        parametros.parametros || ''
+      );
+    });
+  };
+
+  continuarFuncao = (
+    parametros: IParametrosContinuarFuncao
+  ): Promise<IResultadoContinuarFuncao> => {
+    return this.criarPromise<IResultadoContinuarFuncao>(() => {
+      return this.library.continuaFuncaoSiTefInterativo(
+        parametros.comando,
+        parametros.tipoCampo,
+        parametros.tamMinimo,
+        parametros.tamMaximo,
+        parametros.buffer,
+        parametros.tamanhoBuffer,
+        parametros.continua
+      );
+    });
+  };
+
+  finalizarFuncao = (
+    parametros: IParametrosFinalizarFuncao
+  ): Promise<boolean> => {
+    return this.criarPromise<boolean>(() => {
+      return this.library.finalizaFuncaoSiTefInterativo(
+        parametros.confirma,
+        parametros.cupomFiscal,
+        parametros.dataFiscal,
+        parametros.horaFiscal,
+        parametros.parametros
+      );
     });
   };
 
