@@ -1,6 +1,8 @@
+require('dotenv/config');
+
 module.exports = {
-  ip: "0.0.0.0",
-  loja: "00000000",
-  terminal: "00000000",
-  reservado: ""
+  ip: process.env.SITEF_IP || '0.0.0.0',
+  loja: process.env.SITEF_LOJA || '00000000',
+  terminal: process.env.SITEF_TERMINAL || '00000000',
+  reservado: process.env.SITEF_RESERVADO || '',
 };

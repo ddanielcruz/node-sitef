@@ -1,6 +1,6 @@
-const chalk = require("chalk");
+const chalk = require('chalk');
 
-module.exports = error => {
+module.exports = (error) => {
   const message = error.message || `Erro desconhecido (${error.name}).`;
-  console.log(chalk.red(message), "\n");
+  console.log(chalk.red(message), '\n');
 };

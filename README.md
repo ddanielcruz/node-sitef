@@ -7,11 +7,23 @@
   Portabilidade das DLLs do SiTef para aplicações JavaScript utilizando Node Addons
   </p>
 
-[![npm](https://img.shields.io/npm/v/node-sitef)](https://www.npmjs.com/package/node-sitef)
+  <a href="https://www.npmjs.com/package/node-sitef">
+    <img alt="npm" src="https://img.shields.io/npm/v/node-sitef?color=3a86ff">
+  </a>
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/danielccunha/node-sitef?color=%233a86ff">
+  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/danielccunha/node-sitef?color=%233a86ff">
+  <a href="https://github.com/danielccunha/node-sitef/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/danielccunha/node-sitef?color=%233a86ff">
+  </a>
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen?color=%233a86ff">
 
 </div>
 
+## Projeto
+
 A biblioteca consiste da portabilidade da DLL do [SiTef](https://www.softwareexpress.com.br/index.php?a=1590867134) para aplicações JavaScript. Ela foi desenvolvida em C++ portando para uma classe JavaScript utilizando [Node Addons](https://nodejs.org/api/addons.html).
+
+![Usage GIF](.github/assets/usage.gif)
 
 ## Instalação
 

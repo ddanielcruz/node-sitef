@@ -85,7 +85,7 @@ module.exports.simularFuncao = async () => {
     const valor = await askQuestion('Qual o valor? ');
 
     // Inicia a função
-    console.log(`\n${now()} Iniciando a função...\n`);
+    console.log(`\n${now()} Iniciando a função`);
 
     // Envia o objeto contendo os dados da função. Esses dados são específicos do SiTef que estou utilizando,
     // então fique a vontade para alterar os parâmetros
@@ -115,15 +115,13 @@ module.exports.simularFuncao = async () => {
       // Escreve as mensagens de retorno e de buffer, caso retornado alguma
       console.log(
         now(),
-        messages.funcao[ret] || `Retorno desconhecido (${ret})`,
-        buffer ? '' : '\n'
+        messages.funcao[ret] || `Retorno desconhecido (${ret})`
       );
-      if (buffer) console.log(now(), buffer, '\n');
+      if (buffer) console.log(now(), buffer);
 
       // Limpa ou escreve no buffer, dependendo do comando
       if ([20, 21].includes(cmd) || (cmd >= 30 && cmd <= 35) || cmd === 42) {
         bufferRetorno = await askQuestion('Retorno: ');
-        console.log();
       } else {
         bufferRetorno = '';
       }

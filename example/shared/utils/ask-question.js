@@ -1,15 +1,15 @@
-const readline = require("readline");
-const chalk = require("chalk");
+const readline = require('readline');
+const chalk = require('chalk');
 
-module.exports = query => {
+module.exports = (query) => {
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
-    terminal: false
+    terminal: false,
   });
 
-  return new Promise(resolve =>
-    rl.question(chalk.yellow(query), ans => {
+  return new Promise((resolve) =>
+    rl.question(chalk.yellow(query), (ans) => {
       rl.close();
       resolve(ans);
     })
