@@ -54,3 +54,4 @@ tmp/*
 !tmp/.gitkeep
 cli/
 _cli/
+dist
