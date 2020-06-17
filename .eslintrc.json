@@ -1,17 +1,14 @@
 {
   "env": {
-    "commonjs": true,
-    "es6": true,
+    "es2020": true,
     "node": true
   },
   "extends": ["standard", "prettier"],
-  "plugins": ["prettier"],
-  "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
-  },
+  "plugins": ["@typescript-eslint", "prettier"],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 11
+    "ecmaVersion": 11,
+    "sourceType": "module"
   },
   "rules": {
     "prettier/prettier": "error"

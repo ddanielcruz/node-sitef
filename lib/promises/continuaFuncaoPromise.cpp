@@ -94,3 +94,4 @@ private:
   int tamBuffer;
   int continua;
 };
+

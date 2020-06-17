@@ -1,7 +1,6 @@
 #include "nodesitef.hpp"
 #include "promises/promises.hpp"
 
-
 #ifdef _WIN32
 HMODULE handler;
 #endif
