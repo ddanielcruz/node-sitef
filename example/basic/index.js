@@ -1,19 +1,19 @@
-const path = require("path");
-const chalk = require("chalk");
+const path = require('path');
+const chalk = require('chalk');
 
-const CliSiTef = require("../../src/cli-sitef");
-const config = require("../shared/config");
-const { messages } = require("../shared/utils");
+const SiTef = require('../../src/SiTef');
+const config = require('../shared/config');
+const { messages } = require('../shared/utils');
 
 // Cria o objeto do SiTef
 const dllPath = path.resolve(
   __dirname,
-  "..",
-  "shared",
-  "bin",
-  "libclisitef.so"
+  '..',
+  'shared',
+  'bin',
+  'libclisitef.so'
 );
-const sitef = new CliSiTef(dllPath);
+const sitef = new SiTef(dllPath);
 
 const main = () => {
   const promise = sitef
@@ -30,16 +30,19 @@ const main = () => {
       if (response !== 1) throw message;
 
       console.log(`VerificaPresencaPinPad: ${message}`);
-      return sitef.escreverMensagem("Lorem ipsum.");
+      return sitef.escreverMensagem('Lorem ipsum.');
     })
     .then((response) => {
-      message =
+      const message =
         response === 0
-          ? "Mensagem escrita com sucesso."
-          : "Não foi possível escrever a mensagem.";
+          ? 'Mensagem escrita com sucesso.'
+          : 'Não foi possível escrever a mensagem.';
+
       console.log(`EscreveMensagemPermanentePinPad: ${message}`);
     })
     .catch((err) => console.log(chalk.red(err)));
 
   return promise;
 };
+
+main().then(process.exit);

@@ -1,24 +1,24 @@
-const path = require("path");
-const chalk = require("chalk");
-const moment = require("moment");
-const CliSiTef = require("../../src/cli-sitef");
+const path = require('path');
+const chalk = require('chalk');
+const moment = require('moment');
+const CliSiTef = require('../../src/SiTef');
 
-const config = require("../shared/config");
-const { messages, askQuestion, handleError } = require("../shared/utils");
+const config = require('../shared/config');
+const { messages, askQuestion, handleError } = require('../shared/utils');
 
 // Cria o objeto do SiTef
 const dllPath = path.resolve(
   __dirname,
-  "..",
-  "shared",
-  "bin",
-  "libclisitef.so"
+  '..',
+  'shared',
+  'bin',
+  'libclisitef.so'
 );
 const sitef = new CliSiTef(dllPath);
 
 // Funções auxiliares utilizadas para escrever no console
-moment.locale("pt-BR");
-const now = () => chalk.green(`[${moment().format("LTS")}]`);
+moment.locale('pt-BR');
+const now = () => chalk.green(`[${moment().format('LTS')}]`);
 
 // Função de configuração do SiTef (ConfiguraIntSiTefInterativo)
 module.exports.configurar = async () => {
@@ -27,7 +27,7 @@ module.exports.configurar = async () => {
   try {
     const response = await sitef.configurar(config);
     const message = messages.configuracao[response];
-    console.log(now(), message, "\n");
+    console.log(now(), message, '\n');
   } catch (error) {
     handleError(error);
   }
@@ -40,7 +40,7 @@ module.exports.verificarPresenca = async () => {
   try {
     const response = await sitef.verificarPresenca();
     const message = messages.verificacaoPresenca[response];
-    console.log(now(), message, "\n");
+    console.log(now(), message, '\n');
   } catch (error) {
     handleError(error);
   }
@@ -50,17 +50,17 @@ module.exports.verificarPresenca = async () => {
 module.exports.escreverMensagem = async () => {
   try {
     // Lê a mensagem que será escrita no PinPad
-    const question = "Qual mensagem deseja escrever (max. 30 letras): ";
+    const question = 'Qual mensagem deseja escrever (max. 30 letras): ';
     let message = await askQuestion(question);
 
     // Escreve a mensagem e processa o retorno
     const response = await sitef.escreverMensagem(message);
     message =
       response === 0
-        ? "Mensagem escrita com sucesso."
-        : "Não foi possível escrever a mensagem.";
+        ? 'Mensagem escrita com sucesso.'
+        : 'Não foi possível escrever a mensagem.';
 
-    console.log(`\n${now()}`, message, "\n");
+    console.log(`\n${now()}`, message, '\n');
   } catch (error) {
     handleError(error);
   }
@@ -68,23 +68,21 @@ module.exports.escreverMensagem = async () => {
 
 const criaObjetoFuncao = (funcao, valor) => ({
   funcao: parseInt(funcao),
-  valor: parseFloat(valor)
-    .toFixed(2)
-    .replace(".", ","),
-  cupomFiscal: "12345678",
-  dataFiscal: moment().format("YYYYMMDD"),
-  horaFiscal: moment().format("HHmm"),
-  operador: "Teste",
-  parametros: "[10;11;12;13;14;19;20;28;29;31;32;33;34;35;36]"
+  valor: parseFloat(valor).toFixed(2).replace('.', ','),
+  cupomFiscal: '12345678',
+  dataFiscal: moment().format('YYYYMMDD'),
+  horaFiscal: moment().format('HHmm'),
+  operador: 'Teste',
+  parametros: '[10;11;12;13;14;19;20;28;29;31;32;33;34;35;36]',
 });
 
 module.exports.simularFuncao = async () => {
-  let bufferRetorno = "";
+  let bufferRetorno = '';
 
   try {
     // Lê a função e o valor da função
-    const funcao = await askQuestion("Qual a função? ");
-    const valor = await askQuestion("Qual o valor? ");
+    const funcao = await askQuestion('Qual a função? ');
+    const valor = await askQuestion('Qual o valor? ');
 
     // Inicia a função
     console.log(`\n${now()} Iniciando a função...\n`);
@@ -100,9 +98,9 @@ module.exports.simularFuncao = async () => {
       tipoCampo: 0,
       tamMinimo: 0,
       tamMaximo: 0,
-      buffer: "",
+      buffer: '',
       tamBuffer: 0,
-      continua: 0
+      continua: 0,
     };
 
     // Inicia o ciclo da função, conforme descrito na documentação
@@ -118,16 +116,16 @@ module.exports.simularFuncao = async () => {
       console.log(
         now(),
         messages.funcao[ret] || `Retorno desconhecido (${ret})`,
-        buffer ? "" : "\n"
+        buffer ? '' : '\n'
       );
-      if (buffer) console.log(now(), buffer, "\n");
+      if (buffer) console.log(now(), buffer, '\n');
 
       // Limpa ou escreve no buffer, dependendo do comando
       if ([20, 21].includes(cmd) || (cmd >= 30 && cmd <= 35) || cmd === 42) {
-        bufferRetorno = await askQuestion("Retorno: ");
+        bufferRetorno = await askQuestion('Retorno: ');
         console.log();
       } else {
-        bufferRetorno = "";
+        bufferRetorno = '';
       }
 
       // Por fim, atualiza os parâmetros da continuação para continuar o ciclo
@@ -135,7 +133,7 @@ module.exports.simularFuncao = async () => {
         ...tefMessage,
         ...continua,
         buffer: bufferRetorno,
-        tamBuffer: bufferRetorno.length
+        tamBuffer: bufferRetorno.length,
       };
     }
 
@@ -143,12 +141,12 @@ module.exports.simularFuncao = async () => {
     const objFinalizacao = {
       ...objFuncao,
       confirma: 1,
-      parametros: ""
+      parametros: '',
     };
     await sitef.finalizarFuncao(objFinalizacao);
 
     const message = messages.funcao[retorno];
-    console.log(now(), message, "\n");
+    console.log(now(), message, '\n');
   } catch (error) {
     handleError(error);
   }
