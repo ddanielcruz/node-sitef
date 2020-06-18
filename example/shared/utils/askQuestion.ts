@@ -1,7 +1,7 @@
-const readline = require('readline');
-const chalk = require('chalk');
+import readline from 'readline';
+import chalk from 'chalk';
 
-module.exports = (query) => {
+export default (query: string): Promise<string> => {
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,

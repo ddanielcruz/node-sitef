@@ -1,28 +1,21 @@
-const path = require('path');
-const chalk = require('chalk');
-const moment = require('moment');
-const CliSiTef = require('../../src/SiTef');
+import path from 'path';
+import chalk from 'chalk';
+import moment from 'moment';
+import 'moment/locale/pt-br';
 
-const config = require('../shared/config');
-const { messages, askQuestion, handleError } = require('../shared/utils');
+import SiTef from '../../src';
+import config from '../shared/config';
+import { messages, askQuestion, handleError } from '../shared/utils';
 
-// Cria o objeto do SiTef
-const dllPath = path.resolve(
-  __dirname,
-  '..',
-  'shared',
-  'bin',
-  'libclisitef.so'
-);
-const sitef = new CliSiTef(dllPath);
+// Define o caminho para as DLLs do SiTef e instancia o client
+const dlls = path.resolve(__dirname, '..', 'shared', 'bin', 'libclisitef.so');
+const sitef = new SiTef(dlls);
 
-// Funções auxiliares utilizadas para escrever no console
-moment.locale('pt-BR');
+// Função auxiliar para adicionar a timestamp nos logs
 const now = () => chalk.green(`[${moment().format('LTS')}]`);
 
-// Função de configuração do SiTef (ConfiguraIntSiTefInterativo)
-module.exports.configurar = async () => {
-  console.log(`\n${now()} Configurando o SiTef...`);
+export const configurar = async () => {
+  console.log(`\n${now()} Configurando o SiTef`);
 
   try {
     const response = await sitef.configurar(config);
@@ -33,9 +26,8 @@ module.exports.configurar = async () => {
   }
 };
 
-// Função de verificação de presença do SiTef (VerificaPresencaPinPad)
-module.exports.verificarPresenca = async () => {
-  console.log(`\n${now()} Verificando a presença do PinPad...`);
+export const verificarPresenca = async () => {
+  console.log(`\n${now()} Verificando a presença do PinPad`);
 
   try {
     const response = await sitef.verificarPresenca();
@@ -46,8 +38,7 @@ module.exports.verificarPresenca = async () => {
   }
 };
 
-// Função de escrita de mensagem (EscreveMensagemPermanentePinPad)
-module.exports.escreverMensagem = async () => {
+export const escreverMensagem = async () => {
   try {
     // Lê a mensagem que será escrita no PinPad
     const question = 'Qual mensagem deseja escrever (max. 30 letras): ';
@@ -66,7 +57,7 @@ module.exports.escreverMensagem = async () => {
   }
 };
 
-const criaObjetoFuncao = (funcao, valor) => ({
+const criaObjetoFuncao = (funcao: string, valor: string) => ({
   funcao: parseInt(funcao),
   valor: parseFloat(valor).toFixed(2).replace('.', ','),
   cupomFiscal: '12345678',
@@ -76,7 +67,7 @@ const criaObjetoFuncao = (funcao, valor) => ({
   parametros: '[10;11;12;13;14;19;20;28;29;31;32;33;34;35;36]',
 });
 
-module.exports.simularFuncao = async () => {
+export const simularFuncao = async () => {
   let bufferRetorno = '';
 
   try {
@@ -99,7 +90,7 @@ module.exports.simularFuncao = async () => {
       tamMinimo: 0,
       tamMaximo: 0,
       buffer: '',
-      tamBuffer: 0,
+      tamanhoBuffer: 0,
       continua: 0,
     };
 
@@ -131,7 +122,7 @@ module.exports.simularFuncao = async () => {
         ...tefMessage,
         ...continua,
         buffer: bufferRetorno,
-        tamBuffer: bufferRetorno.length,
+        tamanhoBuffer: bufferRetorno.length,
       };
     }
 

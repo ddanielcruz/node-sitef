@@ -1,12 +1,19 @@
-const chalk = require('chalk');
+import chalk from 'chalk';
 
-const { askQuestion } = require('../shared/utils');
-const client = require('./client');
+import { askQuestion } from '../shared/utils';
+import * as client from './client';
 
-const createOption = (title, handler) => ({ title, handler });
+type Option = {
+  title: string;
+  handler: Function;
+};
 
-// Cria as opções do client
-const options = {
+const createOption = (title: string, handler: Function): Option => ({
+  title,
+  handler,
+});
+
+const options: { [index: string]: Option } = {
   C: createOption('Configurar', client.configurar),
   V: createOption('Verificar presença', client.verificarPresenca),
   E: createOption('Escrever mensagem', client.escreverMensagem),
@@ -28,7 +35,6 @@ function showMenu() {
   console.log();
 }
 
-// Cria a função principal. Necessário criar neste formato para poder utilizar async await
 const main = async () => {
   showMenu();
 
@@ -40,10 +46,12 @@ const main = async () => {
       console.log(chalk.red('Opção inválida! Digite novamente.\n'));
     } else {
       await options[option].handler();
-      if (option === 'S') break;
+
+      if (option === 'S') {
+        break;
+      }
     }
   } while (true);
 };
 
-// Por fim, finaliza o processo quando terminado a função
-main().then(process.exit);
+main();

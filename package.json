@@ -1,6 +1,6 @@
 {
   "name": "node-sitef",
-  "version": "1.3.3",
+  "version": "1.4.0",
   "repository": "https://github.com/danielccunha/node-sitef",
   "homepage": "https://github.com/danielccunha/node-sitef",
   "author": {
@@ -10,29 +10,39 @@
   },
   "license": "GPL-3.0",
   "bugs": "https://github.com/danielccunha/node-sitef/issues",
-  "main": "src/SiTef.js",
+  "main": "dist/index.js",
   "scripts": {
-    "example:basic": "node example/basic",
-    "example:client": "node example/client"
+    "build": "tsc",
+    "prepublish": "tsc",
+    "publish": "npm publish --access public",
+    "example:basic": "ts-node example/basic",
+    "example:client": "ts-node example/client"
   },
   "dependencies": {
     "bindings": "^1.5.0",
     "node-addon-api": "^2.0.0"
   },
   "devDependencies": {
+    "@types/bindings": "^1.3.0",
+    "@types/chalk": "^2.2.0",
+    "@types/node": "^14.0.13",
+    "@typescript-eslint/eslint-plugin": "^3.3.0",
+    "@typescript-eslint/parser": "^3.3.0",
     "dotenv": "^8.2.0",
-    "eslint": "^7.1.0",
+    "eslint": "^7.2.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-import": "^2.21.2",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "moment": "^2.26.0",
     "node-gyp": "^6.0.1",
     "prettier": "^2.0.5",
-    "readline": "^1.3.0"
+    "readline": "^1.3.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5"
   },
   "contributors": [
     {
@@ -45,5 +55,14 @@
       "email": "fefurst@gmail.com",
       "url": "https://github.com/fefurst"
     }
+  ],
+  "files": [
+    "dist/**/*",
+    "build/**/*",
+    "lib/**/*",
+    "src/**/*",
+    "LICENSE",
+    "README.md",
+    "package.json"
   ]
 }

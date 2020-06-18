@@ -9,7 +9,6 @@
     #include <dlfcn.h>
 #endif
 
-
 using Napi::Boolean;
 using Napi::CallbackInfo;
 using Napi::Env;

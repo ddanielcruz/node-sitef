@@ -1,27 +1,32 @@
-module.exports.configuracao = {
-  0: 'Não ocorreu erro',
-  1: 'Endereço IP inválido ou não resolvido',
-  2: 'Código da loja inválido',
-  3: 'Código de terminal inválido',
-  6: 'Erro na inicialização do Tcp/Ip',
-  7: 'Falta de memória',
-  8: 'Não encontrou a CliSiTef ou ela está com problemas',
-  9: 'Configuração de servidores SiTef foi excedida.',
-  10: 'Erro de acesso na pasta CliSiTef (possível falta de permissão para escrita)',
-  11: 'Dados inválidos passados pela automação.',
-  12: 'Modo seguro não ativo (possível falta de configuração no servidor SiTef do arquivo .cha).',
-  13: 'Caminho DLL inválido (o caminho completo das bibliotecas está muito grande).',
+type KeyValueMap = { [index: string]: any };
+
+export const configuracao: KeyValueMap = {
+  '0': 'Não ocorreu erro',
+  '1': 'Endereço IP inválido ou não resolvido',
+  '2': 'Código da loja inválido',
+  '3': 'Código de terminal inválido',
+  '6': 'Erro na inicialização do Tcp/Ip',
+  '7': 'Falta de memória',
+  '8': 'Não encontrou a CliSiTef ou ela está com problemas',
+  '9': 'Configuração de servidores SiTef foi excedida.',
+  '10':
+    'Erro de acesso na pasta CliSiTef (possível falta de permissão para escrita)',
+  '11': 'Dados inválidos passados pela automação.',
+  '12':
+    'Modo seguro não ativo (possível falta de configuração no servidor SiTef do arquivo .cha).',
+  '13':
+    'Caminho DLL inválido (o caminho completo das bibliotecas está muito grande).',
 };
 
-module.exports.verificacaoPresenca = {
-  1: 'Existe um PinPad operacional conectado ao micro.',
-  0: 'Não existe um PinPad conectado ao micro.',
+export const verificacaoPresenca: KeyValueMap = {
+  '1': 'Existe um PinPad operacional conectado ao micro.',
+  '0': 'Não existe um PinPad conectado ao micro.',
   '-1': 'Biblioteca de acesso ao PinPad não encontrada.',
 };
 
-module.exports.funcao = {
-  0: 'Sucesso na execução da função.',
-  10000: 'Deve ser chamada a rotina de continuidade do processo.',
+export const funcao: KeyValueMap = {
+  '0': 'Sucesso na execução da função.',
+  '10000': 'Deve ser chamada a rotina de continuidade do processo.',
   '-1':
     'Módulo não inicializado. O PDV tentou chamar alguma rotina sem antes executar a função configura.',
   '-2': 'Operação cancelada pelo operador.',

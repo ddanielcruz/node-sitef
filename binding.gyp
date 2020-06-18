@@ -8,7 +8,14 @@
         "VCCLCompilerTool": { "ExceptionHandling": 1 },
       },
       "conditions": [
-        ['OS=="win"', { "defines": [ "_HAS_EXCEPTIONS=1" ] }]
+        [
+          'OS=="win"',
+          {
+            "defines": [
+              "_HAS_EXCEPTIONS=1"
+              ]
+          }
+        ]
       ],
       "sources": [
         "lib/promises/*",
