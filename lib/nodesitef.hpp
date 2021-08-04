@@ -29,7 +29,7 @@ using std::string;
 
 // Tipos dos métodos do SiTef
 typedef int (*VerificaPresencaPinPad)();
-typedef int (*ConfiguraIntSiTefInterativo)(const char *, const char *, const char *, const char *);
+typedef int (*ConfiguraIntSiTefInterativoEx)(const char *, const char *, const char *, const char *, const char *);
 typedef int (*IniciaFuncaoSiTefInterativo)(int, const char *, const char *, const char *, const char *, const char *, const char *);
 typedef int (*ContinuaFuncaoSiTefInterativo)(int *, long *, int *, int *, const char *, int, int);
 typedef void (*FinalizaFuncaoSiTefInterativo)(short, const char *, const char *, const char *, const char *);
@@ -39,7 +39,7 @@ typedef int (*LeSimNaoPinPad)(const char *);
 Value carregarDLL(const CallbackInfo &info);
 
 int verificaPresencaPinPad();
-int configuraIntSiTefInterativo(const char *, const char *, const char *, const char *);
+int configuraIntSiTefInterativo(const char *, const char *, const char *, const char *, const char *);
 int escreveMensagemPermanentePinPad(const char *);
 int leSimNaoPinPad(const char *);
 int iniciaFuncaoSiTefInterativo(int, const char *, const char *, const char *, const char *, const char *, const char *);

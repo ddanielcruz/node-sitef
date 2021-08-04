@@ -40,25 +40,26 @@ Value carregarDLL(const CallbackInfo &info)
   return env.Null();
 }
 
-int configuraIntSiTefInterativo(const char *ip, const char *terminal, const char *loja, const char *reservado)
+int configuraIntSiTefInterativo(const char *ip, const char *terminal, const char *loja, const char *reservado, const char *parametrosAdicionais)
 {
   if (!handler)
 
     throw("Carregue a DLL do SiTef!");
 
   #ifdef _WIN32
-  ConfiguraIntSiTefInterativo configuraSitef = (ConfiguraIntSiTefInterativo)GetProcAddress(handler, "ConfiguraIntSiTefInterativo");
+  ConfiguraIntSiTefInterativoEx configuraSitef = (ConfiguraIntSiTefInterativoEx)GetProcAddress(handler, "ConfiguraIntSiTefInterativoEx");
   #endif
 
   #ifdef linux
-  ConfiguraIntSiTefInterativo configuraSitef = (ConfiguraIntSiTefInterativo)dlsym(handler, "ConfiguraIntSiTefInterativo");
+  ConfiguraIntSiTefInterativoEx configuraSitef = (ConfiguraIntSiTefInterativoEx)dlsym(handler, "ConfiguraIntSiTefInterativoEx");
   #endif
 
   return configuraSitef(
       ip,
       terminal,
       loja,
-      reservado);
+      reservado,
+      parametrosAdicionais);
 }
 
 int verificaPresencaPinPad()

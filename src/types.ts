@@ -4,7 +4,8 @@ export interface ILibrary {
     ip: string,
     loja: string,
     terminal: string,
-    reservado: string
+    reservado: string,
+    parametrosAdicionais: string
   ) => number;
   verificaPresencaPinPad: () => number;
   leSimNaoPinPad: (mensagem: string) => number;
@@ -41,6 +42,7 @@ export interface IParametrosConfiguracao {
   loja: string;
   terminal: string;
   reservado?: string;
+  parametrosAdicionais: string;
 }
 
 export interface IParametrosIniciarFuncao {

@@ -25,14 +25,15 @@ export default class SiTef {
   }
 
   configurar(parametros: IParametrosConfiguracao): Promise<number> {
-    const { ip, loja, terminal, reservado } = parametros;
+    const { ip, loja, terminal, reservado, parametrosAdicionais } = parametros;
 
     return createPromise<number>(() => {
       return library.configuraIntSiTefInterativo(
         ip,
         loja,
         terminal,
-        reservado || ''
+        reservado || '',
+        parametrosAdicionais || ''
       );
     });
   }
