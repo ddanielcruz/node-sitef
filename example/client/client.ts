@@ -8,7 +8,7 @@ import config from '../shared/config';
 import { messages, askQuestion, handleError } from '../shared/utils';
 
 // Define o caminho para as DLLs do SiTef e instancia o client
-const dlls = path.resolve(__dirname, '..', 'shared', 'bin', 'libclisitef.so');
+const dlls = path.resolve(__dirname, '..', 'shared', 'bin', 'CliSiTef64I.dll');
 const sitef = new SiTef(dlls);
 
 // Função auxiliar para adicionar a timestamp nos logs

@@ -7,7 +7,7 @@ import { messages } from '../shared/utils';
 
 const main = async () => {
   // Define o caminho para as DLLs do SiTef e instancia o client
-  const dlls = path.resolve(__dirname, '..', 'shared', 'bin', 'libclisitef.so');
+  const dlls = path.resolve(__dirname, '..', 'shared', 'bin', 'CliSiTef64I.dll');
   const sitef = new SiTef(dlls);
 
   try {
