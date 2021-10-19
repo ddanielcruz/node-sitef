@@ -20,7 +20,7 @@ public:
     string dataFiscal = info[3].As<Napi::String>().Utf8Value();
     string horaFiscal = info[4].As<Napi::String>().Utf8Value();
     string operador = info[5].As<Napi::String>().Utf8Value();
-    string paramAdicionais = info[5].As<Napi::String>().Utf8Value();
+    string paramAdicionais = info[6].As<Napi::String>().Utf8Value();
 
     IniciaFuncaoPromise *worker = new IniciaFuncaoPromise(info.Env(), funcao, valor, cupomFiscal, dataFiscal, horaFiscal, operador, paramAdicionais);
     worker->Queue();
